@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
+const fetchUser = require('../middleware/fetchUser')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -9,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET='SahilKeep#pati$ence'
 
 
-//# Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
+//# Route 1: Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
 
 router.post("/createuser", [
   body('name', "enter a valid name").isLength({ min: 3 }),
@@ -54,7 +55,8 @@ router.post("/createuser", [
 
 
 
-//# Authenticate a user using while login with email and password: POST "/api/auth/login".
+//# Route 2: Authenticate a user using while login with email and password: POST "/api/auth/login".
+
 router.post("/login", [
   body('email', "enter a valid email").isEmail(),
   body('password', "password can't be blank").exists(),
@@ -64,15 +66,15 @@ router.post("/login", [
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  
-  const {email,password}=req.body
+
+  const {email,password}=req.body   /// user's entered email and password to login
   try {
-    let user=await User.findOne({email})
-    
+    let user=await User.findOne({email}) /// checking whether user's entered email is in database or not
     if (!user) {
       return res.status(400).json({ errors: "please try to log in with correct email and password" });
     }
-    let passwordCompare=await bcrypt.compare(password, user.password)
+    
+    let passwordCompare=await bcrypt.compare(password, user.password) 
     if (!passwordCompare) {
       return res.status(400).json({ errors: "please try to log in with correct email and password" });
     }
@@ -87,5 +89,20 @@ router.post("/login", [
     console.log(error.message);
     res.status(500).send("Internal error accrued")
   }
+})
+
+
+
+//# Route 3: Get logged in user's details: POST "/api/auth/getuser".  log in required
+
+router.post("/getuser",fetchUser, async (req, res) => {
+try {
+  let userId=req.user.id
+  let user = await User.findById(userId).select("-password")
+  res.json(user)
+} catch (error) {
+  console.log(error.message);
+  res.status(500).send("Internal error accrued")
+}
 })
 module.exports = router
