@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import About from './components/About';
 import NoteState from './context/notes/NoteState';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Navbar /> 
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
+            <Home/>
           </Route>
           <Route exact path="/about">
             <About/>

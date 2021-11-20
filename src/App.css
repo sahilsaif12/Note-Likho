@@ -1,38 +1,94 @@
+
 .App {
   text-align: center;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.note-desc{
+  resize: none;
+}
+.note-container{
+  width:clamp(280px,20%,300px)
+}
+.note-create-btn,
+.note-save-btn{
+  background:linear-gradient(  120deg, #46b6c5 10% ,#1E6262);
+  
+}
+.note-create-btn{
+  box-shadow:    0 5px 10px rgba(0, 0, 0, 0.396);
+}
+.note-save-btn:active{
+  transform: translateY(3px);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.notes-hide{
+  filter: blur(100px);
+  transition: .5s;
+}
+.notes-visible{
+  filter: blur(0);
+}
+ion-icon {
+  font-size: 20px;
+  color: rgb(202, 202, 202);
+}
+
+
+@media screen and (min-width:620px) {
+  .note-create-btn{
+    top:25%;
+    left:30px;
+  }
+  .note-create-btn:active{
+    transform: translateY(3px);
+  }
+  .note-create-btn::after{
+    /* position: ; */
+    right: -10px;
+    content: ' Take a note';
+    color: whitesmoke;
+    font-family: sans-serif;
+  }
+  .createNoteContainer{
+    min-width: 320px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .note-container{
+    width: 90%;
+  }
+  .note-create-btn{
+    bottom:30px;
+    right:30px;
+    box-shadow: 0 0 0 5px white,
+   0 0 0 7px #46b6c5,
+   0 0 15px black;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* ------- custom scrollbar --------*/
+html{
+  --thumbBG: #345B63;
+  --scrollbarBG:#152D35;
 }
-
-.App-link {
-  color: #61dafb;
+body::-webkit-scrollbar {
+  width: 15px;
+  overflow-x: hidden;
+  appearance: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  scrollbar-width:thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }

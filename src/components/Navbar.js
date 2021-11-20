@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link,useLocation } from 'react-router-dom'
 
 export default function Navbar() {
@@ -7,30 +7,37 @@ export default function Navbar() {
   //   console.log(location.pathname);
   // }, [location])
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <Link className="navbar-brand" to="/">Navbar</Link>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
+  
+  
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark sticky-top" style={{backgroundColor:"#2D767F"}}>
+  <Link class="navbar-brand" to="/">Note Likho <i class="fas fa-book-open"></i></Link>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
-      <li className="nav-item ">
-        <Link className={`nav-link ${location.pathname==='/'?"active":""}`} to="/">Home <span className="sr-only">(current)</span></Link>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item ">
+        <Link class="nav-link waves-effect waves-light" to="/about">
+          <i class="fas fa-envelope"></i> Contact
+          <span class="sr-only">(current)</span>
+        </Link>
       </li>
-      
-      <li className="nav-item">
-        <Link className={`nav-link ${location.pathname==='/about'?"active":""}`} to="/about">About</Link>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light" href="#">
+          <i class="fas fa-gear"></i> Settings</a>
       </li>
-      
+      <li class="nav-item active">
+        <a class="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user grey rounded-circle p-2"></i> Profile </a>
+      </li>
     </ul>
-    <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
   )
+   
+
+  
 }
 
 
