@@ -6,12 +6,17 @@
   padding: 0;
 }
 
-
+body{
+  background-color: #ECFFFB;
+}
 .note-desc{
   resize: none;
+  overflow-y: scroll;
 }
 .note-container{
-  width:clamp(280px,20%,300px)
+  width:clamp(280px,20%,300px);
+  position: absolute;
+  
 }
 .note-create-btn,
 .note-save-btn{
@@ -37,8 +42,13 @@ ion-icon {
   color: rgb(202, 202, 202);
 }
 
-
-@media screen and (min-width:620px) {
+.description{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 9;
+}
+@media screen and (min-width:621px) {
   .note-create-btn{
     top:25%;
     left:30px;
@@ -60,6 +70,7 @@ ion-icon {
 @media screen and (max-width: 620px) {
   .note-container{
     width: 90%;
+    top: 70px;
   }
   .note-create-btn{
     bottom:30px;

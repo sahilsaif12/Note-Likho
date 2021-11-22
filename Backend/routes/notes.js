@@ -32,7 +32,7 @@ router.post("/addnote", fetchUser, [
 
 
 
-//# Route 2: getting notes from db : POST "/api/auth/fetchnotes". login required
+//# Route 2: getting notes from db : GET "/api/auth/fetchnotes". login required
 router.get("/fetchnotes", fetchUser, async (req, res) => {
     try {
         let notes = await Note.find({ user: req.user.id })
@@ -86,7 +86,7 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
             return res.status(401).send("Not allowed")
         }
         let deletedNote = await Note.findByIdAndDelete(req.params.id)
-        res.json({ success:"Note deleted" })
+        res.json({success:"Note deleted" })
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Internal error accrued")
