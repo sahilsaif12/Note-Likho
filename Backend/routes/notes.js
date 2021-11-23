@@ -7,8 +7,8 @@ const { body, validationResult } = require('express-validator');
 //# Route 1: Adding notes : POST "/api/auth/addnote". login required
 
 router.post("/addnote", fetchUser, [
-    body('title', "title can't be blank").isLength({ min: 1 }),
-    body('description', "description can't be blank").isLength({ min: 1 }),
+    // body('title', "title can't be blank").isLength({ min: 1 }),
+    // body('description', "description can't be blank").isLength({ min: 1 }),
 ], async (req, res) => {
 
     /// if there are errors, return bad request and the errors

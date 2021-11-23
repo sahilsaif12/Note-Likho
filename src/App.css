@@ -10,12 +10,11 @@ body{
   background-color: #ECFFFB;
 }
 .note-desc{
-  resize: none;
-  overflow-y: scroll;
+  resize:vertical;
 }
 .note-container{
   width:clamp(280px,20%,300px);
-  position: absolute;
+  position: fixed;
   
 }
 .note-create-btn,

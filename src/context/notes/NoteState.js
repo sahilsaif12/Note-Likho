@@ -4,6 +4,7 @@ import NoteContext from './noteContext'
 
 export default function NoteState(props) {
   const [createNote, setcreateNote] = useState(false)
+  const [render, setrender] = useState(null)
   let defaultUpdate={
     update:false,
     noteIndex:0,
@@ -47,6 +48,7 @@ const getNotes=async()=>{
 
       let note=await response.json();
       setnote(notes.concat(note))
+      setrender(note._id)
     }
     
 
@@ -92,7 +94,7 @@ const getNotes=async()=>{
     setnote(newNotes);
     }
     return (
-        <NoteContext.Provider value={{notes,createNote,setcreateNote,update,setupdate,getNotes,addNote,deleteNote,updateNote}}>
+        <NoteContext.Provider value={{notes,createNote,setcreateNote,update,setupdate,getNotes,addNote,deleteNote,updateNote,render,setrender}}>
             {props.children}
         </NoteContext.Provider>
     )

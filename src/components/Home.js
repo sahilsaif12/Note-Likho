@@ -8,9 +8,10 @@ import Search from './Search'
 
 export default function Home() {
     let context = useContext(noteContext)
-    const {createNote,setcreateNote,notes,getNotes}=context
+    const {createNote,setcreateNote,notes,getNotes,setrender}=context
     useEffect(() => {
         getNotes()
+        setrender(1)
         // eslint-disable-next-line
     }, [])
     return (
@@ -25,7 +26,7 @@ export default function Home() {
 
                 <div className={`row justify-content-${window.outerWidth<=620?"center":"evenly"}   px-2 animated notesDiv ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
                     {notes.map((element, i) => {
-                        return <div className="md-col-3 m-3" style={{order:notes.length - i}}>
+                        return <div className="md-col-3 m-3 " style={{order:notes.length - i}}>
                             <Noteitem title={element.title} desc={element.description} tag={element.tag} date={element.date} num={i}  key={String(i)} id={element._id} />
                         </div>
                         

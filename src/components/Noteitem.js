@@ -4,8 +4,8 @@ import noteContext from '../context/notes/noteContext'
 
 export default function Noteitem(props) {
     const context = useContext(noteContext)
-    const {deleteNote,setcreateNote,setupdate}=context
-    const { title, desc, tag, date,id, num } = props
+    const {createNote,setcreateNote,setupdate,deleteNote,render}=context
+    const { title, desc, tag, date,id,num } = props
     let d = new Date(date)
 
     let updatingNote=()=>{
@@ -19,7 +19,7 @@ export default function Noteitem(props) {
     }
     return (
 
-        <div className="card card-cascade wider rounded animated slideInLeft faster" style={{ width: '250px',maxHeight:"400px" }}>
+        <div className={`card card-cascade wider rounded animated ${render===id? "slideInLeft":""} faster`} style={{ width: '250px',maxHeight:"400px" }}>
             <div className="view view-cascade gradient-card-header  rounded p-2 text-white" style={{ backgroundColor: "#345B63" }}>
                 <h3 className="card-header-title mb-3">{title}</h3>
                 <a className="position-absolute" style={{ top: "5px", right: "10px" }} href="#!"><i className="lni lni-star" style={{ color: "white" }}></i></a>
