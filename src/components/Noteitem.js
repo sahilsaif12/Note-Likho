@@ -4,9 +4,19 @@ import noteContext from '../context/notes/noteContext'
 
 export default function Noteitem(props) {
     const context = useContext(noteContext)
-    const {deleteNote}=context
+    const {deleteNote,setcreateNote,setupdate}=context
     const { title, desc, tag, date,id, num } = props
     let d = new Date(date)
+
+    let updatingNote=()=>{
+        setcreateNote(true)
+        setupdate({
+            update:true,
+            noteIndex:num,
+            updateId:id
+        })
+        
+    }
     return (
 
         <div className="card card-cascade wider rounded animated slideInLeft faster" style={{ width: '250px',maxHeight:"400px" }}>
@@ -30,7 +40,7 @@ export default function Noteitem(props) {
                         <ion-icon name="color-palette-outline" style={{ color: "black" }}></ion-icon>
                         <input type="color" style={{ width: "0", height: "0", visibility: "hidden" }} name="" id={`colorPalate_${num}`} />
                     </a>
-                    <a className=" btn-floating btn-fb mx-2" href="#!"   ><i className="lni lni-pencil" style={{ color: "black", fontSize: "20px" }}></i></a>
+                    <a className=" btn-floating btn-fb mx-2" href="#!" onClick={updatingNote}  ><i className="lni lni-pencil" style={{ color: "black", fontSize: "20px" }}></i></a>
                     <a className=" btn-floating btn-fb "  href="#!"   onClick={()=>deleteNote(id)} ><ion-icon name="trash-outline" style={{ color: "black" }}></ion-icon></a>
 
                 </li>
