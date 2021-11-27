@@ -1,13 +1,15 @@
 
 .App {
   text-align: center;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
 
 body{
   background-color: #ECFFFB;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 .note-desc{
   resize:vertical;
@@ -18,7 +20,8 @@ body{
   
 }
 .note-create-btn,
-.note-save-btn{
+.note-save-btn,
+.signUp-btn{
   background:linear-gradient(  120deg, #46b6c5 10% ,#1E6262);
   
 }

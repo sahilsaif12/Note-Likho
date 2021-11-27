@@ -40,7 +40,7 @@ export default function CreateNoteBox(props) {
     return (
         <div className={` p-3 animated ${!animateDown ? ' bounceInUp' : 'bounceOutDown'}   border-2 border-primary shadow-lg rounded blue-grey darken-1 z-depth-5 d-flex flex-column note-container`}>
 
-            <a className="position-absolute " style={{ top: "5px", right: "15px" }} onClick={handleAnimation} href="#!" ><ion-icon name="close-outline" size="large" ></ion-icon></a>
+            <a className="position-absolute " style={{ top: "5px", right: "15px" }} onClick={handleAnimation} href={null} ><ion-icon name="close-outline" size="large" ></ion-icon></a>
 
             <MDBInput  className="text-white" label="Note Title" name="title" labelClass="text-white-50 " valueDefault={update.update ? notes[update.noteIndex].title : ''} onChange={handleOnChange} />
 

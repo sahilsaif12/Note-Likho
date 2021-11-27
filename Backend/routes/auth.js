@@ -17,7 +17,7 @@ router.post("/createuser", [
   body('email', "enter a valid email").isEmail(),
   body('password', "password should be at least 6 character").isLength({ min: 6 }),
 ], async (req, res) => {
-
+  let success=true
   /// if there are errors, return bad request and the errors
   const errors = validationResult(req); 
   if (!errors.isEmpty()) {
@@ -28,7 +28,8 @@ router.post("/createuser", [
   try {
     let user = await User.findOne({ email: req.body.email })
     if (user) {
-      return res.status(400).json({ error: "Sorry a user is already exist with this email" })
+      success=false
+      return res.status(400).json({success, error: "Sorry a user is already exist with this email" })
     }
     /// create a new user
     const salt =await bcrypt.genSalt(10)
@@ -45,7 +46,7 @@ router.post("/createuser", [
       }
     }
     const authToken=jwt.sign(data,JWT_SECRET)
-    res.json({authToken})
+    res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal error accrued")
@@ -61,6 +62,7 @@ router.post("/login", [
   body('email', "enter a valid email").isEmail(),
   body('password', "password can't be blank").exists(),
 ], async (req, res) => {
+  let success=true
   /// if there are errors, return bad request and the errors
   const errors = validationResult(req); 
   if (!errors.isEmpty()) {
@@ -71,12 +73,14 @@ router.post("/login", [
   try {
     let user=await User.findOne({email}) /// checking whether user's entered email is in database or not
     if (!user) {
-      return res.status(400).json({ errors: "please try to log in with correct email and password" });
+      success=false
+      return res.status(400).json({success, errors: "please try to log in with correct email and password" });
     }
     
     let passwordCompare=await bcrypt.compare(password, user.password) 
     if (!passwordCompare) {
-      return res.status(400).json({ errors: "please try to log in with correct email and password" });
+      success=false
+      return res.status(400).json({success, errors: "please try to log in with correct email and password" });
     }
     const data={
       user:{
@@ -85,7 +89,7 @@ router.post("/login", [
     }
     const authToken=jwt.sign(data,JWT_SECRET)
     console.log(authToken);
-    res.json({authToken})
+    res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal error accrued")
@@ -96,14 +100,15 @@ router.post("/login", [
 
 //# Route 3: Get logged in user's details: POST "/api/auth/getuser".  log in required
 
-router.post("/getuser",fetchUser, async (req, res) => {
+router.get("/getuser",fetchUser, async (req, res) => {
+  let success=true
 try {
   let userId=req.user.id
   let user = await User.findById(userId).select("-password")
-  res.json(user)
+  res.json({success,user})
 } catch (error) {
   console.log(error.message);
-  res.status(500).send("Internal error accrued")
+  res.status(500).send(error)
 }
 })
 module.exports = router

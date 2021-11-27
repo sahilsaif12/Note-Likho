@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import './App.css';
 import Navbar from './components/Navbar'
 import {
@@ -8,13 +9,20 @@ import {
 import About from './components/About';
 import NoteState from './context/notes/NoteState';
 import Home from './components/Home';
+import Signup from './components/Signup';
+import Spinner from './components/Spinner';
 
 function App() {
+  const [loginStatus, setloginStatus] = useState(false)
+  
   return (
     <>
     <NoteState>
+    {loginStatus===false && <Signup setloginStatus={setloginStatus} />}
+    {loginStatus==='loading' && <Spinner/>}
+    {loginStatus===true && 
       <Router>
-        <Navbar /> 
+        <Navbar setloginStatus={setloginStatus}/> 
         <Switch>
           <Route exact path="/">
             <Home/>
@@ -23,7 +31,7 @@ function App() {
             <About/>
           </Route> 
         </Switch>
-      </Router>
+      </Router>}
       </NoteState>
       </>
   );

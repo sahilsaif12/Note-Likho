@@ -10,7 +10,7 @@ export default function Home() {
     let context = useContext(noteContext)
     const {createNote,setcreateNote,notes,getNotes,setrender}=context
     useEffect(() => {
-        getNotes()
+        // getNotes()
         setrender(1)
         // eslint-disable-next-line
     }, [])
@@ -20,7 +20,7 @@ export default function Home() {
             <div className="d-flex">
 
                 <div className="createNoteContainer" style={{ zIndex: "2" }} >
-                    <a className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} href="#!" ><i className="fas fa-plus" style={{ color: 'white' }}></i></a>
+                    <a className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} href={null} ><i className="fas fa-plus" style={{ color: 'white' }}></i></a>
                     {createNote && <CreateNoteBox />}
                 </div>
 

@@ -1,11 +1,23 @@
-import React from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import noteContext from '../context/notes/noteContext'
+import { MDBDropdown,MDBDropdownItem,MDBDropdownToggle,MDBDropdownMenu } from 'mdbreact';
 
-export default function Navbar() {
-  // let location=useLocation()
-  // useEffect(() => {
-  //   console.log(location.pathname);
-  // }, [location])
+export default function Navbar(props) {
+  const { setloginStatus } = props
+  const context = useContext(noteContext)
+  const {getUserDetails}=context
+const [user, setuser] = useState('User')
+useEffect(async() => {
+  let profile= await  getUserDetails()
+  setuser(profile)
+}, [])
+
+  let handleLogOut=async()=>{
+    localStorage.removeItem('token')
+    setloginStatus(false)
+
+  }
   return (
   
   
@@ -24,12 +36,21 @@ export default function Navbar() {
         </Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link waves-effect waves-light" href="#!">
+        <a className="nav-link waves-effect waves-light" href={null}>
           <i className="fas fa-gear"></i> Settings</a>
       </li>
       <li className="nav-item active">
-        <a className="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown"  aria-expanded="false" href="#!">
-          <i className="fas fa-user grey rounded-circle p-2"></i> Profile </a>
+      <MDBDropdown>
+                <MDBDropdownToggle nav >
+                  <a className=" waves-light">
+          <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user}</a>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu className="dropdown-default">
+                  <MDBDropdownItem onClick={handleLogOut} >Log out</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">profile Update</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+        
       </li>
     </ul>
   </div>
