@@ -6,7 +6,7 @@ import { MDBDropdown,MDBDropdownItem,MDBDropdownToggle,MDBDropdownMenu } from 'm
 export default function Navbar(props) {
   const { setloginStatus } = props
   const context = useContext(noteContext)
-  const {getUserDetails}=context
+  const {getUserDetails,setnote}=context
 const [user, setuser] = useState('User')
 useEffect(async() => {
   let profile= await  getUserDetails()
@@ -16,6 +16,7 @@ useEffect(async() => {
   let handleLogOut=async()=>{
     localStorage.removeItem('token')
     setloginStatus(false)
+    setnote([])
 
   }
   return (

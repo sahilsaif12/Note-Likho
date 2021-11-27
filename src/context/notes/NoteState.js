@@ -11,20 +11,19 @@ export default function NoteState(props) {
   let defaultUpdate = {
     update: false,
     noteIndex: 0,
-    updateId: ''
+    updateId: '',
+    status:'created'
   }
   const [update, setupdate] = useState(defaultUpdate)
   let host = "http://localhost:5000/api"
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
-  const [token, settoken] = useState('sdf')
+  // const [token, settoken] = useState('sdf')
 
   //* Get all notes
   
   const getNotes = async () => {
     //Api call
-    settoken('saif')
-    console.log(token);
     const response = await fetch(`${host}/notes/fetchnotes`, {
       method: 'GET',
       headers: {
@@ -34,7 +33,6 @@ export default function NoteState(props) {
     });
     let allNotes = await response.json();
     setnote(allNotes)
-    console.log(allNotes)
   }
 
 
@@ -49,7 +47,7 @@ export default function NoteState(props) {
         'auth-token': localStorage.getItem('token')
       },
 
-      body: JSON.stringify({ title, description, tag })
+      body: JSON.stringify({ title, description, tag,edited:false })
     });
 
     let note = await response.json();
@@ -82,7 +80,7 @@ export default function NoteState(props) {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag })
+      body: JSON.stringify({ title, description, tag,edited:true})
 
     });
     let newNotes = JSON.parse(JSON.stringify(notes))
@@ -93,6 +91,7 @@ export default function NoteState(props) {
         newNotes[index].title = `${title === "" ? newNotes[index].title : title}`
         newNotes[index].description = `${description === "" ? newNotes[index].description : description}`
         newNotes[index].tag = `${tag === "" ? newNotes[index].tag : tag}`
+        newNotes[index].edited = true
         break;
       }
     }
@@ -157,7 +156,7 @@ export default function NoteState(props) {
   }
   
   return (
-    <NoteContext.Provider value={{ notes, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails }}>
+    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails }}>
       {props.children}
     </NoteContext.Provider>
   )

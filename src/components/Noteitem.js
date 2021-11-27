@@ -1,11 +1,11 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import Description from './Description'
 import noteContext from '../context/notes/noteContext'
 
 export default function Noteitem(props) {
     const context = useContext(noteContext)
-    const {createNote,setcreateNote,setupdate,deleteNote,render}=context
-    const { title, desc, tag, date,id,num } = props
+    const {createNote,setcreateNote,update,setupdate,deleteNote,render}=context
+    const { title, desc, tag,edited, date,id,num } = props
     let d = new Date(date)
 
     let updatingNote=()=>{
@@ -13,7 +13,7 @@ export default function Noteitem(props) {
         setupdate({
             update:true,
             noteIndex:num,
-            updateId:id
+            updateId:id,
         })
         
     }
@@ -33,7 +33,7 @@ export default function Noteitem(props) {
                     })}
                 </p>
                 <a href={null} className="card-text text-left d-flex">
-                    <p><i className="fas fa-calendar mr-2"></i>{`created on ${d.toLocaleDateString(undefined, { "month": "short", "day": "numeric", "year": "numeric" })}`}</p>
+                    <p><i className="fas fa-calendar mr-2"></i>{`${edited?"Last edited":"created"} on ${d.toLocaleDateString(undefined, { "month": "short", "day": "numeric", "year": "numeric" })}`}</p>
                 </a>
                 <li className="list-inline-item d-flex justify-content-center">
                     <a className=" btn-floating btn-fb ml-1" onClick={() => document.querySelector(`#colorPalate_${num}`).click()} href={null}>
