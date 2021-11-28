@@ -17,9 +17,9 @@ router.post("/addnote", fetchUser, [
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const { title, description, tag,edited } = req.body
+        const { title, description, tag,edited,date } = req.body
         let note = new Note({
-            title, description, tag,edited, user: req.user.id
+            title, description, tag,edited,date, user: req.user.id
         })
         let savedNote = await note.save()
         res.json(savedNote)
@@ -54,6 +54,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
         if (description) { newNote.description = description }
         if (tag) { newNote.tag = tag }
         if (edited) { newNote.edited = edited }
+        if (date) { newNote.date = date }
 
         let note = await Note.findById(req.params.id) /// finding with note's id which has been passed in api endpoint (:id)
         if (!note) {

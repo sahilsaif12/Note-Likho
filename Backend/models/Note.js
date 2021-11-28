@@ -22,8 +22,8 @@ const notesSchema = new Schema({
         type:Boolean,
     },
     date:{
-        type:Date,
-        default:Date.now
+        type:String,
+        // default:Date.now
     }
   });
 

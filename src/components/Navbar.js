@@ -15,7 +15,10 @@ useEffect(async() => {
 
   let handleLogOut=async()=>{
     localStorage.removeItem('token')
-    setloginStatus(false)
+    setloginStatus('loading')
+    setTimeout(() => {
+      setloginStatus(false)
+    }, 500);
     setnote([])
 
   }

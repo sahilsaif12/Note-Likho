@@ -38,8 +38,8 @@ let handleLogIn= async()=>{
                             {window.outerWidth <= 995 && <p  className="text-center h2 p-3 blue-grey-text" >Note Likho</p>
                             }
                     <div class="row d-flex h-100  justify-content-center align-items-center">
-                        <div class="order-2 order-lg-2 d-flex flex-column  justify-content-around " style={window.outerWidth > 995 ? { borderLeft: "4px dashed #a3a2a0", width: "50%" } : {height:""}} >
-                            <div className=" d-flex justify-content-center  py-3 ">
+                        <div class="order-2 order-lg-2 d-flex flex-column  justify-content-around " style={window.outerWidth > 995 ? { borderLeft: "4px dashed #a3a2a0", width: "40%" } : {height:""}} >
+                            <div className=" d-flex justify-content-center ml-4  py-3 ">
 
                                 <div class="btn-group">
                                     <a onClick={() => setsignup(true)} class={`btn ${signup ? "teal lighten-1 " : "teal darken-1 "} text-white`}>Sign Up</a>
@@ -47,23 +47,23 @@ let handleLogIn= async()=>{
                                 </div>
                             </div>
 
-                            <form class={`mx-1 mx-md-4  flex-column justify-content-center    ${!signup ? "d-none" : "d-flex"} `}>
+                            <form class={`mx-1 mx-md-4  flex-column justify-content-center  align-items-center   ${!signup ? "d-none" : "d-flex"} `}>
 
-                                <MDBInput onChange={handleOnchange} name="name" className="w-75" label="Your name" icon="user" />
-                                <MDBInput onChange={handleOnchange} name="email" className="w-75" label="Email" icon="envelope" type="email" />
-                                <MDBInput onChange={handleOnchange} name="password" className="w-75" label="Password" icon="lock" type="password" />
-                                <div class="d-flex justify-content-center  mb-lg-4">
+                                <MDBInput onChange={handleOnchange} name="name" className="w-100" label="Your name" icon="user" />
+                                <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email" icon="envelope" type="email" />
+                                <MDBInput onChange={handleOnchange} name="password" className="w-100" label="Password" icon="lock" type="password" />
+                                <div class="d-flex justify-content-center w-100 ml-4 mb-lg-4">
                                     <button type="button" onClick={handleSignIn} class="btn btn-primary btn-lg rounded signUp-btn">Sign up</button>
                                 </div>
                                 <p className="text-center">Already have an account? <a onClick={() => setsignup(false)} className="teal-text" style={{ textDecoration: "underline" }} >Log in</a></p>
 
                             </form>
 
-                            <form class={`mx-1 mx-md-4  flex-column justify-content-center ${signup ? "d-none" : "d-flex"} `}>
+                            <form class={`mx-1 mx-md-4  flex-column justify-content-center align-items-center  ${signup ? "d-none" : "d-flex"} `}>
 
-                                <MDBInput onChange={handleOnchange} name="email" className="w-75" label="Email" icon="envelope" type="email" />
-                                <MDBInput onChange={handleOnchange} name="password" className="w-75" label="Password" icon="lock" type="password" />
-                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email" icon="envelope" type="email" />
+                                <MDBInput onChange={handleOnchange} name="password" className="w-100" label="Password" icon="lock" type="password" />
+                                <div class="d-flex justify-content-center ml-4 mb-3 mb-lg-4">
                                     <button  type="button" onClick={handleLogIn} class="btn btn-primary btn-lg rounded signUp-btn">Log in</button>
                                 </div>
                                 <p className="text-center">Don't have an account? <a onClick={() => setsignup(true)} className="teal-text" style={{ textDecoration: "underline" }}  >sign up</a></p>

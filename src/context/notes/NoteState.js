@@ -38,7 +38,7 @@ export default function NoteState(props) {
 
   //* Add a note
 
-  const addNote = async (title, description, tag) => {
+  const addNote = async (title, description, tag,date) => {
     //Api call
     const response = await fetch(`${host}/notes/addnote`, {
       method: 'POST',
@@ -47,7 +47,7 @@ export default function NoteState(props) {
         'auth-token': localStorage.getItem('token')
       },
 
-      body: JSON.stringify({ title, description, tag,edited:false })
+      body: JSON.stringify({ title, description, tag,edited:false,date })
     });
 
     let note = await response.json();
@@ -72,7 +72,7 @@ export default function NoteState(props) {
 
 
   //* Update a note
-  const updateNote = async (id, title, description, tag) => {
+  const updateNote = async (id, title, description, tag,date) => {
     //Api call
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
@@ -80,7 +80,7 @@ export default function NoteState(props) {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag,edited:true})
+      body: JSON.stringify({ title, description, tag,edited:true,date})
 
     });
     let newNotes = JSON.parse(JSON.stringify(notes))
@@ -92,6 +92,7 @@ export default function NoteState(props) {
         newNotes[index].description = `${description === "" ? newNotes[index].description : description}`
         newNotes[index].tag = `${tag === "" ? newNotes[index].tag : tag}`
         newNotes[index].edited = true
+        newNotes[index].date = date
         break;
       }
     }

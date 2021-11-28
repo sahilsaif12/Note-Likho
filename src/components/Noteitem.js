@@ -22,7 +22,7 @@ export default function Noteitem(props) {
         <div className={`card card-cascade wider rounded animated ${render===id? "slideInLeft":""} faster`} style={{ width: '250px',maxHeight:"400px" }}>
             <div className="view view-cascade gradient-card-header  rounded p-2 text-white" style={{ backgroundColor: "#345B63" }}>
                 <h3 className="card-header-title mb-3">{title}</h3>
-                <a className="position-absolute" style={{ top: "5px", right: "10px" }} href={null}><i className="lni lni-star" style={{ color: "white" }}></i></a>
+                <a className="position-absolute" style={{ top: "5px", right: "10px" }}   href={null}><i className="lni lni-star" style={{ color: "white" }}></i></a>
                 <p className="mb-0"><ion-icon name="pricetags-outline" ></ion-icon> {tag}</p>
             </div>
 
