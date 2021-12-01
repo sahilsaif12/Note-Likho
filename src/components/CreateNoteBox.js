@@ -20,7 +20,6 @@ export default function CreateNoteBox(props) {
     }
     let noteSavedOrCancel = (msg) => {
         let date=Date()
-        console.log(date);
         setsaveBtn(msg)
         handleAnimation()
         if (update.update) {
@@ -34,7 +33,6 @@ export default function CreateNoteBox(props) {
     
     let handleOnChange = (e) => {
         
-        console.log( e.target.value)
         setnote({ ...note, [e.target.name]: e.target.value })
 
     }

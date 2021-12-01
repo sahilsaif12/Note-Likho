@@ -151,8 +151,6 @@ export default function NoteState(props) {
     });
     
     let res = await response.json();
-    console.log(res);
-    console.log(res.user.name);
     return res.user.name
   }
   
