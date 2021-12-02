@@ -47,9 +47,11 @@ router.get("/fetchnotes", fetchUser, async (req, res) => {
 
 //# Route 3: Update existing notes  : PUT "/api/auth/updatenotes/:id". login required
 router.put("/updatenote/:id", fetchUser, async (req, res) => {
-    const { title, description, tag,edited,date } = req.body
+    const { title, description, tag,edited,stared,date } = req.body
     try {
-        let newNote = {}
+        let newNote = {
+            stared:stared
+        }
         if (title) { newNote.title = title }
         if (description) { newNote.description = description }
         if (tag) { newNote.tag = tag }
@@ -65,6 +67,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
         if (note.user.toString() !== req.user.id) {   // comparing between the user id associated to note's id and req user id which has been sent in header in a wrap of jsonWebToken
             return res.status(401).send("Not allowed")
         }
+        Note.find
         let updatedNote = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true })
         res.json({ updatedNote })
     } catch (error) {
@@ -89,6 +92,17 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
         }
         let deletedNote = await Note.findByIdAndDelete(req.params.id)
         res.json({success:"Note deleted" })
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal error accrued")
+    }
+})
+
+//# Route 5: getting star marked notes from db : GET "/api/notes/starNotes". login required
+router.get("/starNotes", fetchUser, async (req, res) => {
+    try {
+        let notes = await Note.find({ user: req.user.id, stared:true })
+        res.json(notes)
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Internal error accrued")

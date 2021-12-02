@@ -6,12 +6,12 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import About from './components/About';
 import NoteState from './context/notes/NoteState';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Spinner from './components/Spinner';
 import ConfirmBoxAlert from './components/ConfirmBoxAlert';
+import StaredList from './components/StaredList';
 
 function App() {
   const [loginStatus, setloginStatus] = useState(false)
@@ -31,8 +31,8 @@ function App() {
               <Route exact path="/">
                 <Home confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
               </Route>
-              <Route exact path="/about">
-                <About />
+              <Route exact path="/stared" >
+                <StaredList confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}/>
               </Route>
             </Switch>
           </Router>}

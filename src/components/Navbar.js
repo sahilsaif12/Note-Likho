@@ -34,8 +34,8 @@ useEffect(async() => {
   <div className="collapse navbar-collapse" id="navbarSupportedContent-4">
     <ul className="navbar-nav ml-auto">
       <li className="nav-item ">
-        <Link className="nav-link waves-effect waves-light" to="/about">
-          <i className="fas fa-envelope"></i> Contact
+        <Link className="nav-link waves-effect waves-light" to="/stared">Stared
+          <i className="fas fa-star" style={{transform:'scale(.7)'}}></i> 
           <span className="sr-only">(current)</span>
         </Link>
       </li>

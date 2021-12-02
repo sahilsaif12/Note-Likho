@@ -21,6 +21,9 @@ const notesSchema = new Schema({
     edited:{
         type:Boolean,
     },
+    stared:{
+        type:Boolean,
+    },
     date:{
         type:String,
         // default:Date.now

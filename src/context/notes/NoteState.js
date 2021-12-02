@@ -18,7 +18,7 @@ export default function NoteState(props) {
   let host = "http://localhost:5000/api"
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
-  // const [token, settoken] = useState('sdf')
+  const [StarNotes, setStarNotes] = useState([])
 
   //* Get all notes
   
@@ -72,7 +72,8 @@ export default function NoteState(props) {
 
 
   //* Update a note
-  const updateNote = async (id, title, description, tag,date) => {
+  const updateNote = async (id, title, description, tag,edited,date,stared) => {
+    console.log(stared)
     //Api call
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
@@ -80,26 +81,52 @@ export default function NoteState(props) {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag,edited:true,date})
+      body: JSON.stringify({ title, description, tag,edited,stared,date})
 
     });
+    let n= await response.json()
+    console.log(n);
     let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {
-      const element = newNotes[index];
-      if (element._id === id) {
-        newNotes[index].title = `${title === "" ? newNotes[index].title : title}`
-        newNotes[index].description = `${description === "" ? newNotes[index].description : description}`
-        newNotes[index].tag = `${tag === "" ? newNotes[index].tag : tag}`
-        newNotes[index].edited = true
-        newNotes[index].date = date
+      const note = newNotes[index];
+      if (note._id === id) {
+        note.title = `${title === "" ? note.title : title}`
+        note.description = `${description === "" ? note.description : description}`
+        note.tag = `${tag === "" ? note.tag : tag}`
+        note.edited = true
+        note.date = date
+        note.stared=stared
         break;
       }
     }
     setnote(newNotes);
+
+    if (!stared) {
+      let newNotes = StarNotes.filter((note) => note._id !== id)
+      setStarNotes(newNotes)
+
+    }
   }
 
 
+
+  //* Get all star marked notes
+  
+  const getStaredNotes = async () => {
+    //Api call
+    const response = await fetch(`${host}/notes/starNotes`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': localStorage.getItem('token')
+      },
+    });
+    let allNotes = await response.json();
+    setStarNotes(allNotes)
+  }
+
+  
   //* Sign in
   const userSignIn = async (name, email, password) => {
     //Api call
@@ -154,8 +181,10 @@ export default function NoteState(props) {
     return res.user.name
   }
   
+
+
   return (
-    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails }}>
+    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails,StarNotes,getStaredNotes}}>
       {props.children}
     </NoteContext.Provider>
   )

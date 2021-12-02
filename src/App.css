@@ -50,6 +50,10 @@ ion-icon {
   overflow: hidden;
   -webkit-line-clamp: 9;
 }
+
+.star{
+  fill: aliceblue;
+}
 @media screen and (min-width:621px) {
   .note-create-btn{
     top:25%;

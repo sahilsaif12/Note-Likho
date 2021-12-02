@@ -31,6 +31,8 @@ let handleLogIn= async()=>{
         // history.push('/')
     }
 }
+let required=<sup style={{color:"red"}}>&#9733;</sup>
+
     return (
         <div style={{ height: "100vh", width: "100vw", backgroundColor: "#ECFFFB" }} >
             <div class="row d-flex justify-content-center align-items-center h-100 w-100 ">
@@ -49,11 +51,11 @@ let handleLogIn= async()=>{
 
                             <form class={`mx-1 mx-md-4  flex-column justify-content-center  align-items-center   ${!signup ? "d-none" : "d-flex"} `}>
 
-                                <MDBInput onChange={handleOnchange} name="name" className="w-100" label="Your name" icon="user" />
-                                <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email" icon="envelope" type="email" />
-                                <MDBInput onChange={handleOnchange} name="password" className="w-100" label="Password" icon="lock" type="password" />
+                                <MDBInput onChange={handleOnchange} name="name" className="w-100" label="Your name *" icon="user" />
+                                <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email *" icon="envelope" type="email" />
+                                <MDBInput onChange={handleOnchange} name="password" className="w-100" label={`Password *`} icon="lock" type="password" />
                                 <div class="d-flex justify-content-center w-100 ml-4 mb-lg-4">
-                                    <button type="button" onClick={handleSignIn} class="btn btn-primary btn-lg rounded signUp-btn">Sign up</button>
+                                    <button disabled={userDetails.name.trim()==="" || userDetails.email.trim()==="" || userDetails.password.trim()===""} type="button" onClick={handleSignIn} class="btn btn-primary btn-lg rounded signUp-btn">Sign up</button>
                                 </div>
                                 <p className="text-center">Already have an account? <a onClick={() => setsignup(false)} className="teal-text" style={{ textDecoration: "underline" }} >Log in</a></p>
 
