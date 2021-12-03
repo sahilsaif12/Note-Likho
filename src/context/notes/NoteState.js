@@ -85,7 +85,6 @@ export default function NoteState(props) {
 
     });
     let n= await response.json()
-    console.log(n);
     let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {
@@ -94,18 +93,17 @@ export default function NoteState(props) {
         note.title = `${title === "" ? note.title : title}`
         note.description = `${description === "" ? note.description : description}`
         note.tag = `${tag === "" ? note.tag : tag}`
-        note.edited = true
+        note.edited = edited
         note.date = date
         note.stared=stared
         break;
       }
     }
     setnote(newNotes);
-
+    
     if (!stared) {
       let newNotes = StarNotes.filter((note) => note._id !== id)
       setStarNotes(newNotes)
-
     }
   }
 
@@ -126,7 +124,7 @@ export default function NoteState(props) {
     setStarNotes(allNotes)
   }
 
-  
+
   //* Sign in
   const userSignIn = async (name, email, password) => {
     //Api call
@@ -143,9 +141,11 @@ export default function NoteState(props) {
       localStorage.setItem('token',res.authToken)
       // history.push('/')
     }
-    return res.success
+    console.log(res)
+    return res
+    
   }
-
+  
 
   //* Log in
   const userLogIn = async (email, password) => {
@@ -159,13 +159,14 @@ export default function NoteState(props) {
     });
 
     let res = await response.json();
+    console.log(res)
     if (res.success) {
       localStorage.setItem('token',res.authToken)
       // history.push('/')
     }
-    return res.success
+    return res
   }
-
+  
   //* Get user details
   const getUserDetails = async () => {
     //Api call

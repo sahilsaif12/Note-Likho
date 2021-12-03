@@ -13,15 +13,16 @@ const JWT_SECRET='SahilKeep#pati$ence'
 //# Route 1: Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
 
 router.post("/createuser", [
-  body('name', "enter a valid name").isLength({ min: 3 }),
-  body('email', "enter a valid email").isEmail(),
-  body('password', "password should be at least 6 character").isLength({ min: 6 }),
+  body('name', "Name cant be blank ").isLength({ min: 1}),
+  body('email', "Enter a valid email").isEmail(),
+  body('password', "Password should be at least 6 character").isLength({ min: 6 }),
 ], async (req, res) => {
   let success=true
   /// if there are errors, return bad request and the errors
   const errors = validationResult(req); 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    success=false
+    return res.status(400).json({success,matched:'invalid',  errors: errors.array() });
   }
 
   /// check whether the user with same email exists already
@@ -29,7 +30,7 @@ router.post("/createuser", [
     let user = await User.findOne({ email: req.body.email })
     if (user) {
       success=false
-      return res.status(400).json({success, error: "Sorry a user is already exist with this email" })
+      return res.status(400).json({success,matched:true, errors:"A user is already exist with this email" })
     }
     /// create a new user
     const salt =await bcrypt.genSalt(10)
@@ -59,14 +60,15 @@ router.post("/createuser", [
 //# Route 2: Authenticate a user using while login with email and password: POST "/api/auth/login".
 
 router.post("/login", [
-  body('email', "enter a valid email").isEmail(),
-  body('password', "password can't be blank").exists(),
+  body('email', "Enter a valid email").isEmail(),
+  body('password', "Password can't be blank").exists(),
 ], async (req, res) => {
   let success=true
   /// if there are errors, return bad request and the errors
   const errors = validationResult(req); 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    success=false
+    return res.status(400).json({success,matched:"invalid", errors: errors.array() });
   }
 
   const {email,password}=req.body   /// user's entered email and password to login
@@ -74,13 +76,13 @@ router.post("/login", [
     let user=await User.findOne({email}) /// checking whether user's entered email is in database or not
     if (!user) {
       success=false
-      return res.status(400).json({success, errors: "please try to log in with correct email and password" });
+      return res.status(400).json({success,matched:false, errors: "please try to log in with correct email and password" });
     }
     
     let passwordCompare=await bcrypt.compare(password, user.password) 
     if (!passwordCompare) {
       success=false
-      return res.status(400).json({success, errors: "please try to log in with correct email and password" });
+      return res.status(400).json({success,matched:false, errors: "please try to log in with correct email and password" });
     }
     const data={
       user:{

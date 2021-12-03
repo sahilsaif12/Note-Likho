@@ -26,7 +26,7 @@ export default function Home(props) {
                 </div>
 
                 {notes.length === 0 &&
-                    <div className=" text-center w-100 position-absolute">
+                    <div className=" text-center  position-absolute" style={{width:"95%"}}>
                         <p className="h3 text-muted text-center ">No notes to show</p>
                     </div>
                     }
