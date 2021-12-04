@@ -84,7 +84,6 @@ export default function NoteState(props) {
       body: JSON.stringify({ title, description, tag,edited,stared,date})
 
     });
-    let n= await response.json()
     let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {

@@ -3,8 +3,11 @@ import noteContext from '../context/notes/noteContext'
 import '../App.css'
 import vid from "../note likho.mp4"
 import { MDBInput } from 'mdbreact';
+import {useHistory} from "react-router-dom";
+
 
 const Signup = (props) => {
+    // let history=useHistory()
     const context = useContext(noteContext)
     const { userSignIn, userLogIn, getNotes } = context
     const { setloginStatus } = props
@@ -22,13 +25,9 @@ const Signup = (props) => {
         if (response.success) {
             // getNotes()
             setloginStatus(true)
-            // history.push('/')
         }
         else {
-            // setloginStatus(false)
-
-            // setSignUpError(response.errors)
-            // setalreadyExist(response.matched)
+            
             console.log(response.errors)
             setSignUpError({
                 matched:response.matched,
@@ -42,7 +41,6 @@ const Signup = (props) => {
         if (response.success) {
             getNotes()
             setloginStatus(true)
-            // history.push('/')
         }
         else{
             setLogInError({

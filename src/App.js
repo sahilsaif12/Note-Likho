@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,withRouter
 } from "react-router-dom";
 import NoteState from './context/notes/NoteState';
 import Home from './components/Home';
@@ -41,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App) ;

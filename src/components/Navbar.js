@@ -1,9 +1,11 @@
 import React,{useContext,useState,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useHistory} from 'react-router-dom'
 import noteContext from '../context/notes/noteContext'
 import { MDBDropdown,MDBDropdownItem,MDBDropdownToggle,MDBDropdownMenu } from 'mdbreact';
 
 export default function Navbar(props) {
+  let history=useHistory()
+  // let location=useLocation()
   const { setloginStatus } = props
   const context = useContext(noteContext)
   const {getUserDetails,setnote}=context
@@ -14,6 +16,7 @@ useEffect(async() => {
 }, [])
 
   let handleLogOut=async()=>{
+    history.push("/")
     localStorage.removeItem('token')
     setloginStatus('loading')
     setTimeout(() => {
@@ -33,21 +36,22 @@ useEffect(async() => {
   </button>
   <div className="collapse navbar-collapse" id="navbarSupportedContent-4">
     <ul className="navbar-nav ml-auto">
+    <li className="nav-item">
+        <Link className="nav-link waves-effect waves-light" to="/">
+          <i className="fas fa-gear"></i> All Notes</Link>
+      </li>
       <li className="nav-item ">
         <Link className="nav-link waves-effect waves-light" to="/stared">Stared
           <i className="fas fa-star" style={{transform:'scale(.7)'}}></i> 
           <span className="sr-only">(current)</span>
         </Link>
       </li>
-      <li className="nav-item">
-        <a className="nav-link waves-effect waves-light" href={null}>
-          <i className="fas fa-gear"></i> Settings</a>
-      </li>
+      
       <li className="nav-item active">
       <MDBDropdown>
                 <MDBDropdownToggle nav >
                   <a className=" waves-light">
-          <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user}</a>
+          <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user.slice(0,22)}</a>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem onClick={handleLogOut} >Log out</MDBDropdownItem>
