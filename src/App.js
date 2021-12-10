@@ -12,10 +12,12 @@ import Signup from './components/Signup';
 import Spinner from './components/Spinner';
 import ConfirmBoxAlert from './components/ConfirmBoxAlert';
 import StaredList from './components/StaredList';
+import ExpandNoteBox from './components/ExpandNoteBox';
 
 function App() {
   const [loginStatus, setloginStatus] = useState(false)
   const [confirmAlert, setconfirmAlert] = useState({ alert: false, id: '' })
+  const [expand, setexpand] = useState(false)
 
   return (
     <>
@@ -26,13 +28,14 @@ function App() {
           <Router>
             <Navbar setloginStatus={setloginStatus} />
             {confirmAlert.alert && <ConfirmBoxAlert confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}/>}
+            {/* {expand.expand && <ExpandNoteBox expand={expand} setexpand={setexpand} />} */}
             
             <Switch>
               <Route exact path="/">
-                <Home confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
+                <Home confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}  setexpand={setexpand} expand={expand} />
               </Route>
               <Route exact path="/stared" >
-                <StaredList confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}/>
+                <StaredList confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}  setexpand={setexpand} expand={expand}/>
               </Route>
             </Switch>
           </Router>}

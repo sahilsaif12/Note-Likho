@@ -54,8 +54,9 @@ useEffect(async() => {
           <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user.slice(0,22)}</a>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem onClick={handleLogOut} >Log out</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">profile Update</MDBDropdownItem>
+                  <MDBDropdownItem onClick={handleLogOut} >Log out <i class="bi bi-fullscreen"></i></MDBDropdownItem>
+                  
+                  {/* <MDBDropdownItem href="#!">profile Update</MDBDropdownItem> */}
                 </MDBDropdownMenu>
               </MDBDropdown>
         

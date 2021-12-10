@@ -9,7 +9,7 @@ import Search from './Search'
 export default function Home(props) {
     let context = useContext(noteContext)
     const { createNote, setcreateNote, notes, getNotes, setrender } = context
-    const { confirmAlert, setconfirmAlert } = props
+    const { confirmAlert, setconfirmAlert,expand, setexpand } = props
 
     useEffect(() => {
         // getNotes()
@@ -17,12 +17,12 @@ export default function Home(props) {
         // eslint-disable-next-line
     }, [])
     return (
-        <div className="px-3"  >
+        <div className={`${!expand?"px-3":""}`} >
             <Search />
             <div className="d-flex">
-                <div className="createNoteContainer" style={{ zIndex: "2" }} >
+                <div className="createNoteContainer"  style={{ zIndex: "2" }} >
                     <a className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} href={null} ><i className="fas fa-plus" style={{ color: 'white' }}></i></a>
-                    {createNote && <CreateNoteBox />}
+                    {createNote && <CreateNoteBox expand={expand} setexpand={setexpand} />}
                 </div>
 
                 {notes.length === 0 &&
@@ -30,7 +30,7 @@ export default function Home(props) {
                         <p className="h3 text-muted text-center ">No notes to show</p>
                     </div>
                     }
-                <div className={`row justify-content-${window.outerWidth <= 620 ? "center" : "evenly"}   px-2 animated notesDiv ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
+                <div className={`row ${expand && "w-75"} justify-content-${window.outerWidth <= 620 ? "center" : "evenly"}   px-2 animated  ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
                     {notes.map((element, i) => {
                         return <div className="md-col-3 m-3 " style={{ order: notes.length - i }}>
                             <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date}  stared={element.stared} num={i} key={String(i)} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
