@@ -19,6 +19,7 @@ export default function NoteState(props) {
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
   const [StarNotes, setStarNotes] = useState([])
+  const [expandNoteBox, setexpandNoteBox] = useState({expand:false})
 
   //* Get all notes
   
@@ -66,14 +67,15 @@ export default function NoteState(props) {
         'auth-token': localStorage.getItem('token')
       }
     });
+    response.json()
     let newNotes = notes.filter((note) => note._id !== id)
     setnote(newNotes)
+    setrender('')
   }
 
 
   //* Update a note
-  const updateNote = async (id, title, description, tag,edited,date,stared) => {
-    console.log(stared)
+  const updateNote = async (id, title, description, tag,edited,date,stared,color) => {
     //Api call
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
@@ -81,9 +83,10 @@ export default function NoteState(props) {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag,edited,stared,date})
+      body: JSON.stringify({ title, description, tag,edited,stared,date,color})
 
     });
+    response.json()
     let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {
@@ -95,6 +98,7 @@ export default function NoteState(props) {
         note.edited = edited
         note.date = date
         note.stared=stared
+        note.color=color
         break;
       }
     }
@@ -140,7 +144,6 @@ export default function NoteState(props) {
       localStorage.setItem('token',res.authToken)
       // history.push('/')
     }
-    console.log(res)
     return res
     
   }
@@ -158,7 +161,6 @@ export default function NoteState(props) {
     });
 
     let res = await response.json();
-    console.log(res)
     if (res.success) {
       localStorage.setItem('token',res.authToken)
       // history.push('/')
@@ -184,7 +186,7 @@ export default function NoteState(props) {
 
 
   return (
-    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails,StarNotes,getStaredNotes}}>
+    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails,StarNotes,getStaredNotes,expandNoteBox,setexpandNoteBox}}>
       {props.children}
     </NoteContext.Provider>
   )

@@ -10,9 +10,14 @@ export default function Navbar(props) {
   const context = useContext(noteContext)
   const {getUserDetails,setnote}=context
 const [user, setuser] = useState('User')
-useEffect(async() => {
-  let profile= await  getUserDetails()
-  setuser(profile)
+
+useEffect(() => {
+  let profileData=async()=>{
+    let profile= await  getUserDetails()
+    setuser(profile)
+  }
+  profileData()
+  // eslint-disable-next-line
 }, [])
 
   let handleLogOut=async()=>{
@@ -50,11 +55,11 @@ useEffect(async() => {
       <li className="nav-item active">
       <MDBDropdown>
                 <MDBDropdownToggle nav >
-                  <a className=" waves-light">
-          <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user.slice(0,22)}</a>
+                  <span className=" waves-light">
+          <i className="fas fa-user grey rounded-circle p-2 mx-2"></i>{user.slice(0,22)}</span>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem onClick={handleLogOut} >Log out <i class="bi bi-fullscreen"></i></MDBDropdownItem>
+                  <MDBDropdownItem onClick={handleLogOut} >Log out <i className="bi bi-fullscreen"></i></MDBDropdownItem>
                   
                   {/* <MDBDropdownItem href="#!">profile Update</MDBDropdownItem> */}
                 </MDBDropdownMenu>

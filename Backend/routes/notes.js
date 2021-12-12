@@ -47,7 +47,7 @@ router.get("/fetchnotes", fetchUser, async (req, res) => {
 
 //# Route 3: Update existing notes  : PUT "/api/auth/updatenotes/:id". login required
 router.put("/updatenote/:id", fetchUser, async (req, res) => {
-    const { title, description, tag,edited,stared,date } = req.body
+    const { title, description, tag,edited,stared,date,color } = req.body
     try {
         let newNote = {
             stared:stared
@@ -56,6 +56,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
         if (description) { newNote.description = description }
         if (tag) { newNote.tag = tag }
         if (edited) { newNote.edited = edited }
+        if (color) { newNote.color = color }
         if (date) { newNote.date = date }
 
         let note = await Note.findById(req.params.id) /// finding with note's id which has been passed in api endpoint (:id)
@@ -72,7 +73,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
         res.json({ updatedNote })
     } catch (error) {
         console.log(error.message);
-        res.status(500).send("Internal error accrued")
+        res.status(500).send(error)
     }
 })
 

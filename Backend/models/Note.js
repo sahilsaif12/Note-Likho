@@ -24,6 +24,10 @@ const notesSchema = new Schema({
     stared:{
         type:Boolean,
     },
+    color:{
+        type:String,
+        default:'#345B63'
+    },
     date:{
         type:String,
         // default:Date.now

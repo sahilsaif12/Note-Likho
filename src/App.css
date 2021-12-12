@@ -10,9 +10,10 @@ body{
   background-color: #ECFFFB;
   margin: 0;
   padding: 0;
+  
 }
 .note-desc{
-  resize:vertical;
+  resize:none;
 }
 .note-container{
   width:clamp(280px,20%,300px);
@@ -54,6 +55,44 @@ ion-icon {
 .star{
   fill: aliceblue;
 }
+.colorIcon{
+  position: relative;
+}
+.colorIcon .colorContainer{
+  display: none;
+  width: 150px;
+  position: absolute;
+  background-color:#363636;
+  top: -105px;
+  left: -50px;
+  padding-left: 18px;
+  border-radius: 10px;
+}
+
+.colorIcon:hover .colorContainer{
+  display: block;
+}
+
+.colorBoxes{
+  width: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin: 3px;
+  border: 2px ridge rgba(255, 255, 255, 0.964);
+  cursor: pointer;
+}
+
+.tick{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tick::after{
+  content: '✔';
+  color: white;
+  
+}
 @media screen and (min-width:621px) {
   .note-create-btn{
     top:25%;
@@ -71,6 +110,9 @@ ion-icon {
   }
   .createNoteContainer{
     min-width: 320px;
+  }
+  .expandedNoteContainer{
+    min-width: 200px;
   }
 }
 @media screen and (max-width: 620px) {

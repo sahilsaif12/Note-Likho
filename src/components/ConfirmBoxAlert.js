@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, useState } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import noteContext from '../context/notes/noteContext'
 
 export default function ConfirmBoxAlert(props) {
@@ -8,6 +8,7 @@ export default function ConfirmBoxAlert(props) {
     const ref = useRef('')
     useEffect(() => {
         ref.current.click()
+        // eslint-disable-next-line
     }, [])
     let deletingNote=()=>{
         deleteNote(confirmAlert.id)
@@ -15,23 +16,23 @@ export default function ConfirmBoxAlert(props) {
     }
     return (
         <div >
-            <button type="button" class="btn btn-primary d-none" ref={ref} data-toggle="modal" data-target="#staticBackdrop">
+            <button type="button" className="btn btn-primary d-none" ref={ref} data-toggle="modal" data-target="#staticBackdrop">
                 Launch static backdrop modal
             </button>
 
-            <div class="modal fade" style={{ overflow: 'hidden' }} id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header ">
-                            <h5 class="modal-titl h5 px-3 text-center " id="staticBackdropLabel">Are you sure to delete this note? </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={() => setconfirmAlert({ alert: false })} style={{outline:'none'}}>
+            <div className="modal fade" style={{ overflow: 'hidden' }} id="staticBackdrop" data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered " role="document">
+                    <div className="modal-content">
+                        <div className="modal-header ">
+                            <h5 className="modal-titl h5 px-3 text-center " id="staticBackdropLabel">Are you sure to delete this note? </h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setconfirmAlert({ alert: false })} style={{outline:'none'}}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
-                        <div class="modal-footer p-3 d-flex justify-content-center">
-                            <button type="button"   class="btn mdb-color lighten-1 white-text rounded" data-dismiss="modal" onClick={() => setconfirmAlert({ alert: false })}>cancel</button>
-                            <button type="button"  class="btn btn-danger rounded" data-dismiss="modal"  onClick={deletingNote} >Delete</button>
+                        <div className="modal-footer p-3 d-flex justify-content-center">
+                            <button type="button"   className="btn mdb-color lighten-1 white-text rounded" data-dismiss="modal" onClick={() => setconfirmAlert({ alert: false })}>cancel</button>
+                            <button type="button"  className="btn btn-danger rounded" data-dismiss="modal"  onClick={deletingNote} >Delete</button>
                         </div>
                     </div>
                 </div>
