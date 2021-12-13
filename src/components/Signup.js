@@ -38,10 +38,10 @@ const Signup = (props) => {
         }
     }
     let handleLogIn = async () => {
-        // setloginStatus('loading')
         let response = await userLogIn(userDetails.email, userDetails.password)
         if (response.success) {
-            getNotes()
+            setloginStatus('loading')
+            await getNotes()
             setloginStatus(true)
         }
         else{
@@ -57,7 +57,7 @@ const Signup = (props) => {
     }
 
     return (
-        <div style={{ height: "100vh", width: "100vw", backgroundColor: "#ECFFFB" }} >
+        <div style={{ height: "100vh", width: "100%", backgroundColor: "#ECFFFB" }} >
             <div className="row d-flex justify-content-center align-items-center h-100 w-100 ">
                 <div className={`car text-black w-100 ${window.outerWidth <= 995 ?"":"h-100"} rounded`} style={{ backgroundColor: " #ECFFFB" }}>
                     {window.outerWidth <= 995 && <p className="text-center h2 p-3 blue-grey-text" >Note Likho</p>

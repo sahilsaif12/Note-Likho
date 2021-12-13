@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 .App {
   text-align: center;
@@ -114,6 +115,39 @@ ion-icon {
   .expandedNoteContainer{
     min-width: 200px;
   }
+}
+
+.socialMediaBtn{
+  /* width: 50px; */
+  /* aspect-ratio: 1; */
+  border-radius: 50%;
+  transform: scale(.5);
+  font-size: 30px;
+}
+.creditName{
+  position: relative;
+  font-family: 'Dancing Script', cursive,sans-serif;
+  font-weight: 600;
+  font-size: 23px;
+  letter-spacing: 2px;
+  color: #00b688;
+  text-shadow: 0 2px 3px #c9d4d498 ;
+}
+.creditName::after,
+.creditName::before{
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100% ;
+  height: 10px;
+  border-top: 3px solid #00b688;
+  border-radius: 43% 57% 59% 41% / 77% 50% 50% 23%   ;
+}
+.creditName::before{
+  bottom: -16px;
+  left: 5px;
+  
 }
 @media screen and (max-width: 620px) {
   .note-container{

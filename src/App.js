@@ -49,7 +49,8 @@ else{
               </Route>
             </Switch>
           </Router>}
-            <Footer/>
+          <Footer/>
+          {/* {loginStatus === true &&  <Footer/>} */}
     </>
   );
 }

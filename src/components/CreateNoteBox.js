@@ -10,6 +10,7 @@ export default function CreateNoteBox(props) {
     const context = useContext(noteContext)
     const { notes, addNote, setcreateNote, update, setupdate, updateNote,StarNotes } = context
     const [note, setnote] = useState({ "title": "", "description": "", "tag": "" })
+    let NOTES=newNote?notes:StarNotes
     let handleAnimation = () => {
         setTimeout(() => {
             setanimateDown(true)
@@ -35,7 +36,6 @@ export default function CreateNoteBox(props) {
     let handleOnChange = (e) => {
         setnote({ ...note, [e.target.name]: e.target.value })
     }
-    let NOTES=newNote?notes:StarNotes
     return (
         <div style={expand ? { width: "100%", backdropFilter: "blur(20px)", height: "100%", position: "fixed", top: "5%" } : {}}>
             <div className={` p-3 animated ${!animateDown ? ' bounceInUp' : 'bounceOutDown'}   border-2 border-primary shadow-lg rounded blue-grey darken-1 z-depth-5 d-flex flex-column note-container`} style={expand ? { width: "80%", height: "80%", position: "absolute", left: "10%", top: "10%",transition:".3s" } : {transition:".3s"}} >

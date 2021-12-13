@@ -77,6 +77,8 @@ export default function NoteState(props) {
   //* Update a note
   const updateNote = async (id, title, description, tag,edited,date,stared,color) => {
     //Api call
+    // let bgcolor=color?color:
+    console.log(notes.indexOf(id))
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
       headers: {
