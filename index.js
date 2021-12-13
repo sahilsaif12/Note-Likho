@@ -18,6 +18,6 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
 // app.use('/api/starNotes', require('./routes/starNotes'))
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
