@@ -1,10 +1,12 @@
 const connectToMongo=require('./db')
 connectToMongo()
 const cors=require('cors')
+require('dotenv').config({path:'./.env'});
 
 const express = require('express')
 const app = express()
 const port = 5000
+const path=require('path')
  
 app.use(cors())
 
@@ -16,8 +18,16 @@ app.use(express.json())
 //available routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
-// app.use('/api/starNotes', require('./routes/starNotes'))
 
+// serve static assets if in production
+if (process.env.NODE_ENV ==='production') {
+  // set static folder
+  app.use(express.static('client/build'))
+  app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+  
+}
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
