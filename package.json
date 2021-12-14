@@ -27,6 +27,7 @@
     "phoenix": "^1.6.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "node":"^v16.0.0"
   }
 }
