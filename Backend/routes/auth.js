@@ -5,9 +5,12 @@ const fetchUser = require('../middleware/fetchUser')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config({path:'../.env'});
 
 
-const JWT_SECRET='SahilKeep#pati$ence'
+
+
+// const JWT_SECRET='SahilKeep#pati$ence'
 
 
 //# Route 1: Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
@@ -46,7 +49,7 @@ router.post("/createuser", [
         id:user2.id
       }
     }
-    const authToken=jwt.sign(data,JWT_SECRET)
+    const authToken=jwt.sign(data,process.env.JWT_SECRET)
     res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
@@ -89,7 +92,7 @@ router.post("/login", [
         id:user.id
       }
     }
-    const authToken=jwt.sign(data,JWT_SECRET)
+    const authToken=jwt.sign(data,process.env.JWT_SECRET)
     res.json({success,authToken})
   } catch (error) {
     console.log(error.message);

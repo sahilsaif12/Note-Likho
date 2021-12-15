@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-// require('dotenv').config();
-const JWT_SECRET='SahilKeep#pati$ence'
+require('dotenv').config();
+
+// const JWT_SECRET='SahilKeep#pati$ence'
 
 const fetchUser=(req,res,next)=>{
     const token=req.header('auth-token')
@@ -9,7 +10,7 @@ const fetchUser=(req,res,next)=>{
     }
     try {
         
-        const data=jwt.verify(token,JWT_SECRET)
+        const data=jwt.verify(token,process.env.JWT_SECRET)
         req.user=data.user
         next()
         
