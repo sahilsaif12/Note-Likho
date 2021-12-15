@@ -26,6 +26,11 @@
     "mongoose": "^6.1.1",
     "phoenix": "^1.6.4"
   },
+  
+    "optionalDependencies": {
+      "fsevents": "2.1.2"
+    },
+  
   "devDependencies": {
     "node": "^16.0.0",
     "nodemon": "^2.0.15",
