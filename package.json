@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@heroku-cli/plugin-buildpacks": "^7.54.0",
     "@heroku/buildpack-registry": "^1.0.1",
     "async-file": "^2.0.2",
     "bcryptjs": "^2.4.3",
@@ -25,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.1",
     "phoenix": "^1.6.4",
+    "rimraf": "^2.7.1",
     "strip-eof": "^2.0.0",
     "strip-final-newline": "^3.0.0",
     "vercel": "^23.1.2"
