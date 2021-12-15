@@ -33,8 +33,8 @@
     "fsevents": "2.1.2"
   },
   "devDependencies": {
-    "node": "^16.0.0",
+    "node": "^14.18.2",
     "nodemon": "^2.0.15",
-    "npm": "^7.10.0"
+    "npm": "^6.14.15"
   }
 }
