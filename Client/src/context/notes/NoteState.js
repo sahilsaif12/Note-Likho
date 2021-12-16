@@ -15,7 +15,7 @@ export default function NoteState(props) {
     status:'created'
   }
   const [update, setupdate] = useState(defaultUpdate)
-  let host = "http://localhost:5000/api"
+  let host = "https://note-likho.herokuapp.com/api"
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
   const [StarNotes, setStarNotes] = useState([])

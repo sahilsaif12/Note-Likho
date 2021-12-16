@@ -53,7 +53,7 @@ router.post("/createuser", [
     res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
-    res.status(500).send("Internal error accrued")
+    res.status(500).send(error)
   }
 
 })
