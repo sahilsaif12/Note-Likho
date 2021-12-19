@@ -26,7 +26,7 @@ export default function CreateNoteBox(props) {
         handleAnimation()
         if (update.update) {
             setupdate({ update: false })
-            updateNote(update.updateId, note.title, note.description, note.tag, true, date)
+            updateNote(update.updateId, note.title, note.description, note.tag, true, date,false,false)
         }
         else {
             addNote(note.title, note.description, note.tag, date)

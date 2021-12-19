@@ -69,7 +69,10 @@ export default function NoteState(props) {
     });
     response.json()
     let newNotes = notes.filter((note) => note._id !== id)
+    let newstarNotes = StarNotes.filter((note) => note._id !== id)
     setnote(newNotes)
+    setStarNotes(newstarNotes)
+
     setrender('')
   }
 
@@ -77,8 +80,17 @@ export default function NoteState(props) {
   //* Update a note
   const updateNote = async (id, title, description, tag,edited,date,stared,color) => {
     //Api call
-    // let bgcolor=color?color:
-    console.log(notes.indexOf(id))
+    if (!stared || !color ) {
+      for (let index = 0; index < notes.length; index++) {
+        const note = notes[index];
+        if (note._id === id) {
+          stared=stared?stared:note.stared
+          color=color===""?color:note.color
+          break;
+        }
+      }
+      
+    }
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
       headers: {
@@ -105,8 +117,25 @@ export default function NoteState(props) {
       }
     }
     setnote(newNotes);
-    
-    if (!stared) {
+    if (stared) {
+      let newNotes = JSON.parse(JSON.stringify(StarNotes))
+    // Logic to edit in client
+    for (let index = 0; index < newNotes.length; index++) {
+      const note = newNotes[index];
+      if (note._id === id) {
+        note.title = `${title === "" ? note.title : title}`
+        note.description = `${description === "" ? note.description : description}`
+        note.tag = `${tag === "" ? note.tag : tag}`
+        note.edited = edited
+        note.date = date
+        note.stared=stared
+        note.color=color
+        break;
+      }
+    }
+    setStarNotes(newNotes)
+    }
+    else{
       let newNotes = StarNotes.filter((note) => note._id !== id)
       setStarNotes(newNotes)
     }

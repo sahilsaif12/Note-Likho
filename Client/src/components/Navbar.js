@@ -53,7 +53,7 @@ useEffect(() => {
       </li>
       
       
-      <li className="nav-item active">
+      <li className="nav-item active pr-3">
       <MDBDropdown>
                 <MDBDropdownToggle nav >
                   <span className=" waves-light">

@@ -10,9 +10,6 @@ require('dotenv').config({path:"../.env"});
 
 
 
-// const JWT_SECRET='SahilKeep#pati$ence'
-
-
 //# Route 1: Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
 
 router.post("/createuser", [

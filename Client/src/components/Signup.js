@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 const Signup = (props) => {
     let history=useHistory()
     const context = useContext(noteContext)
-    const { userSignIn, userLogIn, getNotes } = context
+    const { userSignIn, userLogIn, getNotes,getStaredNotes } = context
     const { setloginStatus } = props
     const [signup, setsignup] = useState(true)
     const [userDetails, setuserDetails] = useState({ "name": "", "email": "", "password": "" })
@@ -26,7 +26,7 @@ const Signup = (props) => {
         // setloginStatus('loading')
         let response = await userSignIn(userDetails.name.trim(), userDetails.email.trim(), userDetails.password)
         if (response.success) {
-            // getNotes()
+            getNotes()
             setloginStatus(true)
         }
         else {

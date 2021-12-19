@@ -4,13 +4,13 @@
   text-align: center;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 body{
   background-color: #ECFFFB;
   margin: 0;
   padding: 0;
+  overflow: hidden;
   
 }
 .note-desc{
@@ -188,3 +188,12 @@ body::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar{
   width: 0;
 }
+
+/* .footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; 
+  backdrop-filter: blur(50px);
+ } */

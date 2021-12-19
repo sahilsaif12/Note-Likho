@@ -21,7 +21,6 @@ function App() {
   const [confirmAlert, setconfirmAlert] = useState({ alert: false, id: '' })
   const context = useContext(noteContext)
   const { expandNoteBox,setexpandNoteBox } = context
-console.log(expandNoteBox)
   const [expand, setexpand] = useState(false)
   if (expand) {
     document.querySelector('body').style.overflow="hidden"
