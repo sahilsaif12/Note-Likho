@@ -46,11 +46,17 @@ ion-icon {
   color: rgb(202, 202, 202);
 }
 
-.description{
+.description,.title{
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.description{
   -webkit-line-clamp: 9;
+}
+.title{
+  -webkit-line-clamp: 2;
+
 }
 
 .star{
