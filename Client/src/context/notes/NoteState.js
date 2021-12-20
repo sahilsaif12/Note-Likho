@@ -4,7 +4,7 @@ import NoteContext from './noteContext'
 
 
 export default function NoteState(props) {
-  
+
   // let history=useHistory()
   const [createNote, setcreateNote] = useState(false)
   const [render, setrender] = useState(null)
@@ -12,17 +12,17 @@ export default function NoteState(props) {
     update: false,
     noteIndex: 0,
     updateId: '',
-    status:'created'
+    status: 'created'
   }
   const [update, setupdate] = useState(defaultUpdate)
   let host = "https://note-likho.herokuapp.com/api"
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
   const [StarNotes, setStarNotes] = useState([])
-  const [expandNoteBox, setexpandNoteBox] = useState({expand:false})
+  const [expandNoteBox, setexpandNoteBox] = useState({ expand: false })
 
   //* Get all notes
-  
+
   const getNotes = async () => {
     //Api call
     const response = await fetch(`${host}/notes/fetchnotes`, {
@@ -39,7 +39,7 @@ export default function NoteState(props) {
 
   //* Add a note
 
-  const addNote = async (title, description, tag,date) => {
+  const addNote = async (title, description, tag, date) => {
     //Api call
     const response = await fetch(`${host}/notes/addnote`, {
       method: 'POST',
@@ -48,7 +48,7 @@ export default function NoteState(props) {
         'auth-token': localStorage.getItem('token')
       },
 
-      body: JSON.stringify({ title, description, tag,edited:false,date })
+      body: JSON.stringify({ title, description, tag, edited: false, date })
     });
 
     let note = await response.json();
@@ -78,18 +78,18 @@ export default function NoteState(props) {
 
 
   //* Update a note
-  const updateNote = async (id, title, description, tag,edited,date,stared,color) => {
+  const updateNote = async (id, title, description, tag, edited, date, stared, color) => {
     //Api call
-    if (!stared || !color ) {
+    if (stared==="" || color==="") {
       for (let index = 0; index < notes.length; index++) {
         const note = notes[index];
         if (note._id === id) {
-          stared=stared?stared:note.stared
-          color=color===""?color:note.color
+          stared = stared ==="" ?note.stared: stared
+          color = color === "" ?note.color: color 
           break;
         }
       }
-      
+
     }
     const response = await fetch(`${host}/notes/updatenote/${id}`, {
       method: 'PUT',
@@ -97,7 +97,7 @@ export default function NoteState(props) {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag,edited,stared,date,color})
+      body: JSON.stringify({ title, description, tag, edited, stared, date, color })
 
     });
     response.json()
@@ -111,40 +111,47 @@ export default function NoteState(props) {
         note.tag = `${tag === "" ? note.tag : tag}`
         note.edited = edited
         note.date = date
-        note.stared=stared
-        note.color=color
+        note.stared = stared
+        note.color = color
         break;
       }
     }
     setnote(newNotes);
+
+    console.log(stared);
+
     if (stared) {
       let newNotes = JSON.parse(JSON.stringify(StarNotes))
-    // Logic to edit in client
-    for (let index = 0; index < newNotes.length; index++) {
-      const note = newNotes[index];
-      if (note._id === id) {
-        note.title = `${title === "" ? note.title : title}`
-        note.description = `${description === "" ? note.description : description}`
-        note.tag = `${tag === "" ? note.tag : tag}`
-        note.edited = edited
-        note.date = date
-        note.stared=stared
-        note.color=color
-        break;
+      // Logic to edit in client
+      for (let index = 0; index < newNotes.length; index++) {
+        const note = newNotes[index];
+        if (note._id === id) {
+          note.title = `${title === "" ? note.title : title}`
+          note.description = `${description === "" ? note.description : description}`
+          note.tag = `${tag === "" ? note.tag : tag}`
+          note.edited = edited
+          note.date = date
+          note.stared = stared
+          note.color = color
+          break;
+        }
       }
+      setStarNotes(newNotes)
+      console.log("stared");
+
     }
-    setStarNotes(newNotes)
-    }
-    else{
+
+    if(!stared) {
       let newNotes = StarNotes.filter((note) => note._id !== id)
       setStarNotes(newNotes)
+      console.log("not stared");
     }
   }
 
 
 
   //* Get all star marked notes
-  
+
   const getStaredNotes = async () => {
     //Api call
     const response = await fetch(`${host}/notes/starNotes`, {
@@ -172,13 +179,13 @@ export default function NoteState(props) {
 
     let res = await response.json();
     if (res.success) {
-      localStorage.setItem('token',res.authToken)
+      localStorage.setItem('token', res.authToken)
       // history.push('/')
     }
     return res
-    
+
   }
-  
+
 
   //* Log in
   const userLogIn = async (email, password) => {
@@ -193,12 +200,12 @@ export default function NoteState(props) {
 
     let res = await response.json();
     if (res.success) {
-      localStorage.setItem('token',res.authToken)
+      localStorage.setItem('token', res.authToken)
       // history.push('/')
     }
     return res
   }
-  
+
   //* Get user details
   const getUserDetails = async () => {
     //Api call
@@ -209,15 +216,15 @@ export default function NoteState(props) {
         'auth-token': localStorage.getItem('token')
       }
     });
-    
+
     let res = await response.json();
     return res.user.name
   }
-  
+
 
 
   return (
-    <NoteContext.Provider value={{ notes,setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender,userSignIn,userLogIn,getUserDetails,StarNotes,getStaredNotes,expandNoteBox,setexpandNoteBox}}>
+    <NoteContext.Provider value={{ notes, setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender, userSignIn, userLogIn, getUserDetails, StarNotes, getStaredNotes, expandNoteBox, setexpandNoteBox }}>
       {props.children}
     </NoteContext.Provider>
   )

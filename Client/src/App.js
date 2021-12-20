@@ -6,7 +6,6 @@ import {
   Switch,
   Route,withRouter
 } from "react-router-dom";
-import NoteState from './context/notes/NoteState';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Spinner from './components/Spinner';
@@ -20,7 +19,7 @@ function App() {
   const [loginStatus, setloginStatus] = useState(false)
   const [confirmAlert, setconfirmAlert] = useState({ alert: false, id: '' })
   const context = useContext(noteContext)
-  const { expandNoteBox,setexpandNoteBox } = context
+  const { expandNoteBox } = context
   const [expand, setexpand] = useState(false)
   if (expand) {
     document.querySelector('body').style.overflow="hidden"

@@ -21,12 +21,13 @@ export default function CreateNoteBox(props) {
         }, 1000);
     }
     let noteSavedOrCancel = (msg) => {
+        
         let date = Date()
         setsaveBtn(msg)
         handleAnimation()
         if (update.update) {
             setupdate({ update: false })
-            updateNote(update.updateId, note.title, note.description, note.tag, true, date,false,false)
+            updateNote(update.updateId, note.title, note.description, note.tag, true, date,"","")
         }
         else {
             addNote(note.title, note.description, note.tag, date)

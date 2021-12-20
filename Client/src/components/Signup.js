@@ -26,6 +26,7 @@ const Signup = (props) => {
         // setloginStatus('loading')
         let response = await userSignIn(userDetails.name.trim(), userDetails.email.trim(), userDetails.password)
         if (response.success) {
+            setloginStatus('loading')
             getNotes()
             setloginStatus(true)
         }

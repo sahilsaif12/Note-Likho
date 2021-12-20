@@ -9,7 +9,6 @@ export default function ExpandedNoteBox(props) {
     useEffect(() => {
         ref.current.click()
         // eslint-disable-next-line
-        console.log(expandNoteBox)
     }, [])
     return (
         <div className="">
