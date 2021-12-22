@@ -30,7 +30,7 @@ export default function Footer() {
 
                         <a
                             class=" m-1"
-                            href="https://www.linkedin.com/in/sk-saifuddin-8593411b4/" target="_blank"
+                            href="https://www.linkedin.com/in/sk-saifuddin-8593411b4/" target="_blank" rel="noreferrer" 
                             role="button"
                         ><ion-icon style={{color:"#0082ca"}} size="large" name="logo-linkedin"></ion-icon></a>
                         <a

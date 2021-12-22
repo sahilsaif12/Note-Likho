@@ -2,14 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import noteContext from '../context/notes/noteContext'
 import '../App.css'
 import CreateNoteBox from './CreateNoteBox'
-import ExpandedNoteBox from './ExpandedNoteBox'
 import Noteitem from './Noteitem'
-// import Search from './Search'
-// import { MDBInput } from 'mdbreact';
 
 export default function Home(props) {
     let context = useContext(noteContext)
-    const { createNote, setcreateNote, notes, setrender,expandNoteBox,setexpandNoteBox,getNotes } = context
+    const { createNote, setcreateNote, notes, setrender} = context
     const { confirmAlert, setconfirmAlert, expand, setexpand } = props
 
     useEffect(() => {

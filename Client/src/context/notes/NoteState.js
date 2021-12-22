@@ -18,7 +18,7 @@ export default function NoteState(props) {
   let host = "https://note-likho.herokuapp.com/api"
   let initialNotes = []
   const [notes, setnote] = useState(initialNotes)
-  const [StarNotes, setStarNotes] = useState([])
+  const [StarNotes, setStarNotes] = useState(initialNotes)
   const [expandNoteBox, setexpandNoteBox] = useState({ expand: false })
 
   //* Get all notes
@@ -69,10 +69,12 @@ export default function NoteState(props) {
     });
     response.json()
     let newNotes = notes.filter((note) => note._id !== id)
-    let newstarNotes = StarNotes.filter((note) => note._id !== id)
+    setnote([]) // for title color layout error due to state not automatic update instantly. to prevent that this is the solution
     setnote(newNotes)
+    
+    let newstarNotes = StarNotes.filter((note) => note._id !== id)
+    setStarNotes([]) // for title color layout error due to state not automatic update instantly. to prevent that this is the solution
     setStarNotes(newstarNotes)
-
     setrender('')
   }
 
@@ -118,7 +120,6 @@ export default function NoteState(props) {
     }
     setnote(newNotes);
 
-    console.log(stared);
 
     if (stared) {
       let newNotes = JSON.parse(JSON.stringify(StarNotes))
@@ -137,14 +138,13 @@ export default function NoteState(props) {
         }
       }
       setStarNotes(newNotes)
-      console.log("stared");
 
     }
 
-    if(!stared) {
-      let newNotes = StarNotes.filter((note) => note._id !== id)
-      setStarNotes(newNotes)
-      console.log("not stared");
+    if (!stared) {
+      const newNotes =  StarNotes.filter((note) => note._id !== id)
+      setStarNotes([]) // for title color layout error due to state not automatic update instantly. to prevent that this is the solution
+      setStarNotes(newNotes)      
     }
   }
 
@@ -224,7 +224,7 @@ export default function NoteState(props) {
 
 
   return (
-    <NoteContext.Provider value={{ notes, setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender, userSignIn, userLogIn, getUserDetails, StarNotes, getStaredNotes, expandNoteBox, setexpandNoteBox }}>
+    <NoteContext.Provider value={{ notes, setnote, createNote, setcreateNote, update, setupdate, getNotes, addNote, deleteNote, updateNote, render, setrender, userSignIn, userLogIn, getUserDetails, StarNotes,setStarNotes, getStaredNotes, expandNoteBox, setexpandNoteBox }}>
       {props.children}
     </NoteContext.Provider>
   )
