@@ -29,15 +29,16 @@ export default function Noteitem(props) {
         setstar(s)
         updateNote(id, title, desc, tag, edited, date, s, color)
     }
-    let changingColor = async (c) => {
-        await setTitleColor(c)
+
+    let changingColor =  (c) => {
+        setTitleColor(c)
         updateNote(id, title, desc, tag, edited, date, star, c)
     }
     return (
         <div className={`card card-cascade wider rounded animated ${render === id ? "slideInLeft" : ""} faster`} style={{ width: '250px', maxHeight: "400px" }} onClick={() => setexpandNoteBox({ expand: true, title: title, desc: desc, tag: tag, edited: edited, date: d })}>
             <div className="view view-cascade gradient-card-header  rounded p-2 text-white" style={titleColor ? { backgroundColor: titleColor } : { backgroundColor: "#345B63" }}>
                 <h3 className="card-header-title mb-3 title">{title}</h3>
-                <span className="position-absolute" style={{ top: "5px", right: "10px", cursor: "pointer" }} onClick={markedStar} ><i className={`lni ${stared ? 'lni-star-filled' : 'lni-star'} `} style={{ color: "white" }}></i></span>
+                <span className="position-absolute" style={{ top: "5px", right: "10px", cursor: "pointer" }} onClick={markedStar} ><i className={`lni ${star ? 'lni-star-filled' : 'lni-star'} `} style={{ color: "white" }}></i></span>
                 <p className="mb-0"><ion-icon name="pricetags-outline" ></ion-icon> {tag}</p>
             </div>
 
