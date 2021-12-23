@@ -26,7 +26,8 @@ const Signup = (props) => {
         // setloginStatus('loading')
         let response = await userSignIn(userDetails.name.trim(), userDetails.email.trim(), userDetails.password)
         if (response.success) {
-            // getNotes()
+            setloginStatus('loading')
+            getNotes()
             setloginStatus(true)
         }
         else {
@@ -91,7 +92,7 @@ const Signup = (props) => {
                                 <div className="d-flex justify-content-center w-100 ml-4 mb-lg-4">
                                     <button type="button" onClick={handleSignIn} className="btn btn-primary btn-lg rounded signUp-btn">Sign up</button>
                                 </div>
-                                <p className="text-center">Already have an account? <span onClick={() => setsignup(false)} className="teal-text" style={{ textDecoration: "underline" }} >Log in</span></p>
+                                <p className="text-center">Already have an account? <span onClick={() => setsignup(false)} className="teal-text" style={{ textDecoration: "underline",cursor:"pointer" }} >Log in</span></p>
 
                             </form>
 
@@ -114,7 +115,7 @@ const Signup = (props) => {
                                 <div className="d-flex justify-content-center ml-4 mb-3 mb-lg-4">
                                     <button type="button" onClick={handleLogIn} className="btn btn-primary btn-lg rounded signUp-btn">Log in</button>
                                 </div>
-                                <p className="text-center">Don't have an account? <span onClick={() => setsignup(true)} className="teal-text" style={{ textDecoration: "underline" }}  >sign up</span></p>
+                                <p className="text-center">Don't have an account? <span onClick={() => setsignup(true)} className="teal-text" style={{ textDecoration: "underline",cursor:"pointer" }}  >sign up</span></p>
 
                             </form>
 

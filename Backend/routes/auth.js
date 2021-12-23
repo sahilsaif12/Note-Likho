@@ -5,12 +5,9 @@ const fetchUser = require('../middleware/fetchUser')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config({path:'../.env'});
+require('dotenv').config({path:"../.env"});
 
 
-
-
-// const JWT_SECRET='SahilKeep#pati$ence'
 
 
 //# Route 1: Creating an user account using: POST "/api/auth/createuser". Doesn't required Authentication and log in 
@@ -49,11 +46,11 @@ router.post("/createuser", [
         id:user2.id
       }
     }
-    const authToken=jwt.sign(data,process.env.JWT_SECRET)
+    const authToken=jwt.sign(data,`${process.env.JWT_SECRET}`)
     res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
-    res.status(500).send("Internal error accrued")
+    res.status(500).send(error)
   }
 
 })
@@ -87,16 +84,18 @@ router.post("/login", [
       success=false
       return res.status(400).json({success,matched:false, errors: "please try to log in with correct email and password" });
     }
+
     const data={
       user:{
         id:user.id
       }
     }
-    const authToken=jwt.sign(data,process.env.JWT_SECRET)
+    console.log(`${process.env.JWT_SECRET}`)
+    const authToken=jwt.sign(data,`${process.env.JWT_SECRET}`)
     res.json({success,authToken})
   } catch (error) {
     console.log(error.message);
-    res.status(500).send("Internal error accrued")
+    res.status(500).send(error);
   }
 })
 

@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "install-client":"cd Client && npm install",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Client && npm run build --prefix Client"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@heroku-cli/plugin-buildpacks": "^7.54.0",
     "@heroku/buildpack-registry": "^1.0.1",
     "async-file": "^2.0.2",
     "bcryptjs": "^2.4.3",
@@ -24,14 +24,19 @@
     "heroku": "^7.59.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.1",
-    "phoenix": "^1.6.4"
+    "phoenix": "^1.6.4",
+    "rimraf": "^2.7.1",
+    "strip-eof": "^2.0.0",
+    "strip-final-newline": "^3.0.0",
+    "vercel": "^23.1.2"
   },
   "optionalDependencies": {
     "fsevents": "2.1.2"
   },
   "devDependencies": {
-    "node": "^16.0.0",
-    "nodemon": "^2.0.15",
-    "npm": "^7.10.0"
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "^14.x"
   }
 }

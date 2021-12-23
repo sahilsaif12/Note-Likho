@@ -2,14 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import noteContext from '../context/notes/noteContext'
 import '../App.css'
 import CreateNoteBox from './CreateNoteBox'
-import ExpandedNoteBox from './ExpandedNoteBox'
 import Noteitem from './Noteitem'
-// import Search from './Search'
-// import { MDBInput } from 'mdbreact';
 
 export default function Home(props) {
     let context = useContext(noteContext)
-    const { createNote, setcreateNote, notes, setrender,expandNoteBox,setexpandNoteBox } = context
+    const { createNote, setcreateNote, notes, setrender} = context
     const { confirmAlert, setconfirmAlert, expand, setexpand } = props
 
     useEffect(() => {
@@ -19,7 +16,7 @@ export default function Home(props) {
         // eslint-disable-next-line
     }, [])
     return (
-        <div className={`${!expand ? "px-3" : ""}`} >
+        <div className={`${!expand ? "px-3" : ""}`} style={{zIndex:"2",minHeight:'90vh'}} >
             {/* <Search /> */}
             <div className="d-flex">
                 <div className="createNoteContainer pt-5" style={{ zIndex: "2" }} >
@@ -29,13 +26,13 @@ export default function Home(props) {
 
                 {notes.length === 0 &&
                     <div className=" text-center  position-absolute" style={{ width: "95%" }}>
-                        <p className="h3 text-muted text-center ">No notes to show</p>
+                        <p className="h3 text-muted text-center pt-3">No note to show</p>
                     </div>
                 }
                 <div className={`row   justify-content-${window.outerWidth <= 620 ? "center" : "evenly"}   px-2 animated  ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
                     {notes.map((element, i) => {
                         return <div className="md-col-3 m-3 " style={{ order: notes.length - i }}>
-                            <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={String(i)} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
+                            <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={String(i)} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} newNote={true}/>
                         </div>
 
                     })}
