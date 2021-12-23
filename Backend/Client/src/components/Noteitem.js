@@ -8,7 +8,6 @@ export default function Noteitem(props) {
     const { updateNote, setcreateNote, setupdate, render, setexpandNoteBox} = context
     const { title, desc, tag, edited, date, stared, color, id, num, setconfirmAlert } = props
     
-
     let d = new Date(date)
     let updatingNote = (event) => {
         event.stopPropagation()
@@ -20,8 +19,8 @@ export default function Noteitem(props) {
         })
 
     }
-    const [star, setstar] = useState(stared)
-    const [titleColor, setTitleColor] = useState(color)
+    const [star, setstar] = useState(stared) // for fast experience on client side
+    const [titleColor, setTitleColor] = useState(color) // for fast experience on client side
 
     let markedStar = async (event) => {
         event.stopPropagation()
@@ -36,6 +35,7 @@ export default function Noteitem(props) {
     }
     return (
         <div className={`card card-cascade wider rounded animated ${render === id ? "slideInLeft" : ""} faster`} style={{ width: '250px', maxHeight: "400px" }} onClick={() => setexpandNoteBox({ expand: true, title: title, desc: desc, tag: tag, edited: edited, date: d })}>
+
             <div className="view view-cascade gradient-card-header  rounded p-2 text-white" style={titleColor ? { backgroundColor: titleColor } : { backgroundColor: "#345B63" }}>
                 <h3 className="card-header-title mb-3 title">{title}</h3>
                 <span className="position-absolute" style={{ top: "5px", right: "10px", cursor: "pointer" }} onClick={markedStar} ><i className={`lni ${star ? 'lni-star-filled' : 'lni-star'} `} style={{ color: "white" }}></i></span>
@@ -85,7 +85,6 @@ export default function Noteitem(props) {
 
                 </li>
             </div>
-            {/* {confirmAlert && <ConfirmBoxAlert noteId={id}/>} */}
         </div>
 
     )
