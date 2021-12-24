@@ -21,6 +21,7 @@ function App() {
   const context = useContext(noteContext)
   const { expandNoteBox } = context
   const [expand, setexpand] = useState(false)
+  const [scrollPer, setscrollPer] = useState(false)
   if (expand) {
     document.querySelector('body').style.overflow="hidden"
 }
@@ -28,6 +29,15 @@ else{
     document.querySelector('body').style.overflow="visible"
 
 }
+
+window.addEventListener("scroll",()=>{
+  let scrollTop = window.scrollY;
+let docHeight = document.body.offsetHeight;
+let winHeight = window.innerHeight;
+let scrollPercent =(scrollTop / (docHeight - winHeight))*100;
+setscrollPer(Math.floor(scrollPercent));
+})
+
   return (
     <>
         {loginStatus === false && <Signup setloginStatus={setloginStatus} />}
@@ -40,15 +50,15 @@ else{
 
             <Switch>
               <Route exact path="/">
-                <Home confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}  setexpand={setexpand} expand={expand} />
+                <Home confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}  setexpand={setexpand} expand={expand} scrollPer={scrollPer}/>
               </Route>
               <Route exact path="/stared" >
                 <StaredList confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert}  setexpand={setexpand} expand={expand}/>
               </Route>
             </Switch>
           </Router>}
-          <Footer/>
-          {/* {loginStatus === true &&  <Footer/>} */}
+          {/* <Footer/> */}
+          {loginStatus === true &&  <Footer/>}
     </>
   );
 }

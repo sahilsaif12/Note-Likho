@@ -7,10 +7,9 @@ import Noteitem from './Noteitem'
 export default function Home(props) {
     let context = useContext(noteContext)
     const { createNote, setcreateNote, notes, setrender} = context
-    const { confirmAlert, setconfirmAlert, expand, setexpand } = props
+    const { confirmAlert, setconfirmAlert, expand, setexpand,scrollPer } = props
 
     useEffect(() => {
-        // getNotes()
         setrender(1)
         setcreateNote(false)
         // eslint-disable-next-line
@@ -19,8 +18,8 @@ export default function Home(props) {
         <div className={`${!expand ? "px-3" : ""}`} style={{zIndex:"2",minHeight:'90vh'}} >
             {/* <Search /> */}
             <div className="d-flex">
-                <div className="createNoteContainer pt-5" style={{ zIndex: "2" }} >
-                    <span className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " style={{ cursor: "pointer" }} data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} ><i className="fas fa-plus" style={{ color: 'white' }}></i></span>
+                <div className="createNoteContainer pt-5 position-relative" style={{ zIndex: "2" }} >
+                    <span className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " style={window.outerWidth <= 620&& scrollPer>=85 ?{bottom:`${scrollPer-84}%`,transition:".3s"}:{}} data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} ><i className="fas fa-plus" style={{ color: 'white' }}></i></span>
                     {createNote && <CreateNoteBox expand={expand} setexpand={setexpand} newNote={true} />}
                 </div>
 

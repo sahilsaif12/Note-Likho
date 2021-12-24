@@ -40,7 +40,7 @@ export default function CreateNoteBox(props) {
     return (
         <div style={expand ? { width: "100%", backdropFilter: "blur(20px)", height: "100%", position: "fixed", top: "5%" } : {}}>
             <div className={` p-3 animated ${!animateDown ? ' bounceInUp' : 'bounceOutDown'}   border-2 border-primary shadow-lg rounded blue-grey darken-1 z-depth-5 d-flex flex-column note-container`} style={expand ? { width: "80%", height: "80%", position: "absolute", left: "10%", top: "10%",transition:".3s" } : {transition:".3s"}} >
-            
+            {window.outerWidth >= 620 && 
                 <span className="position-absolute " style={{ top: "5px", left: "15px",cursor:"pointer" }}     >
                     {expand ?
                         <svg style={{ color: "white" }} onClick={() => setexpand(false)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-fullscreen-exit" viewBox="0 0 16 16">
@@ -52,7 +52,7 @@ export default function CreateNoteBox(props) {
                         </svg>
                     }
 
-                </span>
+                </span>}
                 
                 <span className="position-absolute " style={{ top: "5px", right: "15px",cursor:"pointer" }} onClick={handleAnimation}    ><ion-icon name="close-outline" size="large" ></ion-icon></span>
 

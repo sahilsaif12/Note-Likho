@@ -29,6 +29,7 @@ body{
 }
 .note-create-btn{
   box-shadow:    0 5px 10px rgba(0, 0, 0, 0.396);
+  cursor: pointer;
 }
 .note-save-btn:active{
   transform: translateY(3px);
