@@ -19,7 +19,7 @@ export default function Home(props) {
             {/* <Search /> */}
             <div className="d-flex">
                 <div className="createNoteContainer pt-5 position-relative" style={{ zIndex: "2" }} >
-                    <span className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " style={window.outerWidth <= 620&& scrollPer>=85 ?{bottom:`${scrollPer-84}%`,transition:".3s"}:{}} data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} ><i className="fas fa-plus" style={{ color: 'white' }}></i></span>
+                    <span className=" position-fixed btn-circle btn-lg  rounded animated zoomIn fast  note-create-btn " style={window.outerWidth <= 620&& scrollPer>=85 ?{bottom:`${scrollPer-82}%`,transition:".3s"}:{}} data-tooltip-text="Create note" data aria-label="note" onClick={() => setcreateNote(true)} ><i className="fas fa-plus" style={{ color: 'white' }}></i></span>
                     {createNote && <CreateNoteBox expand={expand} setexpand={setexpand} newNote={true} />}
                 </div>
 
