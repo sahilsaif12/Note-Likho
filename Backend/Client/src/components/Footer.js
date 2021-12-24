@@ -1,9 +1,10 @@
 import React from 'react'
 import '../App.css';
 export default function Footer() {
+    
     return (
-        <div>
-            <footer class=" text-center text-white footer"  >
+        <div className='footer' style={{zIndex:"10"}}>
+            <footer class=" text-center text-white "  >
                 <div class="d-flex justify-content-center align-items-center pb-0" style={{backgroundColor:'#00000033'}}>
                 <div class="text-center p-3 blue-grey-text h6 mr-4" >
                     <span style={{color:'black'}}>©</span>  Made with Passion <ion-icon name="trending-up-outline" style={{color:'black'}} ></ion-icon> by <span className=' creditName'>Sahil</span>
