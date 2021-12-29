@@ -34,7 +34,7 @@ export default function Noteitem(props) {
         updateNote(id, title, desc, tag, edited, date, star, c)
     }
     return (
-        <div className={`card card-cascade wider rounded animated ${render === id ? "slideInLeft" : ""} faster`} style={{ width: '250px', maxHeight: "430px" }} onClick={() => setexpandNoteBox({ expand: true, title: title, desc: desc, tag: tag, edited: edited, date: d })}>
+        <div className={`card card-cascade wider rounded animated ${render === id ? "slideInLeft" : ""} faster`} style={{ width: '250px', maxHeight: "450px" }} onClick={() => setexpandNoteBox({ expand: true, title: title, desc: desc, tag: tag, edited: edited, date: d })}>
 
             <div className="view view-cascade gradient-card-header  rounded p-2 text-white" style={titleColor ? { backgroundColor: titleColor } : { backgroundColor: "#345B63" }}>
                 <h3 className="card-header-title mb-3 title">{title}</h3>
