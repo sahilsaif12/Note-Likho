@@ -76,15 +76,15 @@ const Signup = (props) => {
                             <form className={`mx-1 mx-md-4  flex-column justify-content-center  align-items-center   ${!signup ? "d-none" : "d-flex"} `}>
                                 <div className={`position-relative ${window.outerWidth > 995 && "w-75" }`}>
                                     {SignUpError.matched==="invalid" && SignUpError.error.map((msg) => msg.param === "name" && <small className="align-self-start pink-text position-absolute" >{msg.msg}</small>)}
-                                    <MDBInput onChange={handleOnchange} name="name" className="w-100" label="Your name *" icon="user" />
+                                    <MDBInput onChange={handleOnchange} name="name"  className="w-100" label="Your name *" icon="user" />
                                 </div>
                                 <div className={`position-relative ${window.outerWidth > 995 && "w-75" }`}>
                                     {SignUpError.matched==="invalid" && SignUpError.error.map((msg) => msg.param === "email" && <small className="align-self-start pink-text position-absolute" >{msg.msg}</small>)}
-                                    <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email *" icon="envelope" type="email" />
+                                    <MDBInput onChange={handleOnchange} name="email" autoComplete="username" className="w-100" label="Email *" icon="envelope" type="email" />
                                 </div>
                                 <div className={`position-relative ${window.outerWidth > 995 && "w-75" }`}>
                                     {SignUpError.matched==="invalid" && SignUpError.error.map((msg) => msg.param === "password" && <small className="pink-text position-absolute w-100" >{msg.msg}</small>)}
-                                    <MDBInput onChange={handleOnchange} name="password" className="w-100" label={`Password *`} icon="lock" type="password" />
+                                    <MDBInput onChange={handleOnchange} name="password" autoComplete="current-password" className="w-100" label={`Password *`} icon="lock" type="password" />
                                 </div>
                                 <div className={`position-relative w-100 text-center`}>
                                 {SignUpError.matched===true  &&    <small className="red-text w-100 " >{SignUpError.error}</small>}
@@ -100,12 +100,12 @@ const Signup = (props) => {
 
                             <div className={`position-relative ${window.outerWidth > 995 && "w-75" }`}>
                             {LogInError.matched==="invalid" && LogInError.error.map((msg) => msg.param === "email" && <small className="align-self-start pink-text position-absolute" >{msg.msg}</small>)}
-                                <MDBInput onChange={handleOnchange} name="email" className="w-100" label="Email" icon="envelope" type="email" />
+                                <MDBInput onChange={handleOnchange} name="email" autoComplete="username" className="w-100" label="Email" icon="envelope" type="email" />
                                 </div>
 
                                 <div className={`position-relative ${window.outerWidth > 995 && "w-75" }`}>
                                 {LogInError.matched==="invalid" && LogInError.error.map((msg) => msg.param === "password" && <small className="align-self-start pink-text position-absolute" >{msg.msg}</small>)}
-                                <MDBInput onChange={handleOnchange} name="password" className="w-100" label="Password" icon="lock" type="password" />
+                                <MDBInput onChange={handleOnchange} name="password" autoComplete="current-password" className="w-100" label="Password" icon="lock" type="password" />
                                 </div>
 
                                 <div className={`position-relative w-100 text-center`}>

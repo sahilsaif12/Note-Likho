@@ -17,6 +17,7 @@ export default function CreateNoteBox(props) {
         }, 300);
         setTimeout(() => {
             setcreateNote(false)
+            setupdate({ update: false })
             setexpand(false)
         }, 1000);
     }
@@ -32,6 +33,7 @@ export default function CreateNoteBox(props) {
         else {
             addNote(note.title, note.description, note.tag, date)
         }
+
     }
 
     let handleOnChange = (e) => {

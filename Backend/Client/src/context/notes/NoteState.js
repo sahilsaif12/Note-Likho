@@ -145,6 +145,7 @@ export default function NoteState(props) {
       const newNotes =  StarNotes.filter((note) => note._id !== id)
       setStarNotes([]) // for title color layout error due to state not automatic update instantly. to prevent that this is the solution
       setStarNotes(newNotes)      
+      setrender('')
     }
   }
 

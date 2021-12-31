@@ -14,9 +14,9 @@ export default function StaredList(props) {
         let loadData = async () => {
             setloading(true)
             await getStaredNotes()
-            setcreateNote(false)
             setloading(false)
         }
+        setcreateNote(false)
         loadData()
         // eslint-disable-next-line
     },[])
@@ -41,7 +41,7 @@ export default function StaredList(props) {
                     <div className={`row justify-content-${window.outerWidth <= 620 ? "center" : "evenly"}   px-2 animated notesDiv ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
                         {StarNotes.map((element, i) => {
                             return <div className="md-col-3 m-3 " style={{ order: StarNotes.length - i }}>
-                                <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={String(i)} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
+                                <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={i.toString()} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} />
                             </div>
 
                         })}

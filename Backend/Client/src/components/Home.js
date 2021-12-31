@@ -6,12 +6,13 @@ import Noteitem from './Noteitem'
 
 export default function Home(props) {
     let context = useContext(noteContext)
-    const { createNote, setcreateNote, notes, setrender} = context
+    const { createNote, setcreateNote, notes, setrender,setupdate} = context
     const { confirmAlert, setconfirmAlert, expand, setexpand,scrollPer } = props
 
     useEffect(() => {
         setrender(1)
         setcreateNote(false)
+        setupdate({update:false})
         // eslint-disable-next-line
     }, [])
     return (
@@ -31,7 +32,7 @@ export default function Home(props) {
                 <div className={`row   justify-content-${window.outerWidth <= 620 ? "center" : "evenly"}   px-2 animated  ${createNote && window.outerWidth <= 620 ? "notes-hide" : "d-flex zoomIn faster notes-visible"} `} style={{ zIndex: "1" }}>
                     {notes.map((element, i) => {
                         return <div className="md-col-3 m-3 " style={{ order: notes.length - i }}>
-                            <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={String(i)} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} newNote={true}/>
+                            <Noteitem title={element.title} desc={element.description} tag={element.tag} edited={element.edited} date={element.date} stared={element.stared} color={element.color} num={i} key={i.toString()} id={element._id} confirmAlert={confirmAlert} setconfirmAlert={setconfirmAlert} newNote={true}/>
                         </div>
 
                     })}
