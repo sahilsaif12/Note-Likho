@@ -45,7 +45,7 @@ export default function Noteitem(props) {
             <div className="card-body pb-1  ">
                 <p className="card-text description">
                     {desc.split("\n").map(function (item, id) {
-                        return <Description content={item} key={id} />
+                        return <Description content={item} key={id.toString()} />
                     })}
                 </p>
                 <span className="card-text text-left d-flex">

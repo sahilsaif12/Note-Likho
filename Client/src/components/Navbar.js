@@ -8,7 +8,7 @@ export default function Navbar(props) {
   // let location=useLocation()
   const { setloginStatus } = props
   const context = useContext(noteContext)
-  const {getUserDetails,setnote}=context
+  const {getUserDetails,setnote,setupdate}=context
 const [user, setuser] = useState('User')
 
 useEffect(() => {
@@ -46,7 +46,8 @@ useEffect(() => {
           <i className="fas fa-gear"></i> All Notes</Link>
       </li>
       <li className="nav-item ">
-        <Link className="nav-link waves-effect waves-light" to="/stared">Stared
+        <Link className="nav-link waves-effect waves-light" to="/stared" onClick={()=> setupdate({update:false})
+} >Stared
           <i className="fas fa-star" style={{transform:'scale(.7)'}}></i> 
           <span className="sr-only">(current)</span>
         </Link>
